@@ -1,142 +1,185 @@
 [
   {
-    "id": "rolex-gmt-master-ii-batman",
-    "brand": "Rolex",
-    "model": "GMT-Master II Batman",
-    "price": 18000,
-    "image": "/watches/rolex-gmt-master-ii-batman.png"
+    "id": "casio-f91w",
+    "brand": "Casio",
+    "model": "F-91W",
+    "price": 20,
+    "image": "/watches/casio-f91w.png"
   },
   {
-    "id": "rolex-submariner-date",
-    "brand": "Rolex",
-    "model": "Submariner Date",
-    "price": 14500,
-    "image": "/watches/rolex-submariner-date.png"
+    "id": "seiko-5-sports-srpd63k",
+    "brand": "Seiko",
+    "model": "SEIKO 5 SPORTS AUTOMATIC SRPD63K",
+    "price": 250,
+    "image": "/watches/seiko-5-sports-srpd63k.png"
   },
   {
-    "id": "rolex-daytona-steel",
-    "brand": "Rolex",
-    "model": "Cosmograph Daytona",
-    "price": 32000,
-    "image": "/watches/rolex-daytona-steel.png"
+    "id": "swatch-moonswatch-moon-so33m100",
+    "brand": "Swatch",
+    "model": "MoonSwatch Mission to the Moon",
+    "price": 270,
+    "image": "/watches/swatch-moonswatch-moon.png"
+  },
+  {
+    "id": "apple-watch-ultra-2",
+    "brand": "Apple",
+    "model": "Watch Ultra 2",
+    "price": 400,
+    "image": "/watches/apple-watch-ultra-2.png"
+  },
+  {
+    "id": "garmin-fenix-7-sapphire-solar",
+    "brand": "Garmin",
+    "model": "fēnix 7 Sapphire Solar",
+    "price": 400,
+    "image": "/watches/garmin-fenix-7-sapphire-solar.png"
+  },
+
+  {
+    "id": "bulgari-aluminium",
+    "brand": "Bulgari",
+    "model": "Aluminium",
+    "price": 3300,
+    "image": "/watches/bulgari-aluminium.png"
+  },
+  {
+    "id": "cartier-tank-must-steel-black",
+    "brand": "Cartier",
+    "model": "Tank Must Steel Black",
+    "price": 3350,
+    "image": "/watches/cartier-tank-must-steel-black.png"
+  },
+  {
+    "id": "tudor-black-bay-58-steel-black",
+    "brand": "Tudor",
+    "model": "Black Bay 58 Steel Black",
+    "price": 3350,
+    "image": "/watches/tudor-black-bay-58-steel-black.png"
+  },
+  {
+    "id": "omega-seamaster-diver-300m-steel-black",
+    "brand": "Omega",
+    "model": "Seamaster Diver 300M",
+    "price": 5050,
+    "image": "/watches/omega-seamaster-diver-300m.png"
   },
   {
     "id": "omega-speedmaster-moonwatch",
     "brand": "Omega",
     "model": "Speedmaster Moonwatch",
-    "price": 7200,
+    "price": 6000,
     "image": "/watches/omega-speedmaster-moonwatch.png"
-  },
-  {
-    "id": "omega-seamaster-diver-300m",
-    "brand": "Omega",
-    "model": "Seamaster Diver 300M",
-    "price": 5500,
-    "image": "/watches/omega-seamaster-diver-300m.png"
-  },
-  {
-    "id": "tudor-black-bay-58",
-    "brand": "Tudor",
-    "model": "Black Bay 58",
-    "price": 3800,
-    "image": "/watches/tudor-black-bay-58.png"
-  },
-  {
-    "id": "audemars-piguet-royal-oak-15500st",
-    "brand": "Audemars Piguet",
-    "model": "Royal Oak 15500ST",
-    "price": 65000,
-    "image": "/watches/audemars-piguet-royal-oak-15500st.png"
-  },
-  {
-    "id": "patek-philippe-nautilus-5711",
-    "brand": "Patek Philippe",
-    "model": "Nautilus 5711/1A",
-    "price": 120000,
-    "image": "/watches/patek-philippe-nautilus-5711.png"
-  },
-  {
-    "id": "patek-philippe-aquanaut-5167",
-    "brand": "Patek Philippe",
-    "model": "Aquanaut 5167A",
-    "price": 75000,
-    "image": "/watches/patek-philippe-aquanaut-5167.png"
   },
   {
     "id": "cartier-santos-large",
     "brand": "Cartier",
     "model": "Santos de Cartier Large",
-    "price": 8200,
+    "price": 8800,
     "image": "/watches/cartier-santos-large.png"
   },
   {
-    "id": "cartier-tank-must",
-    "brand": "Cartier",
-    "model": "Tank Must",
-    "price": 3400,
-    "image": "/watches/cartier-tank-must.png"
-  },
-  {
-    "id": "grand-seiko-snowflake-sbga211",
-    "brand": "Grand Seiko",
-    "model": "Snowflake SBGA211",
-    "price": 6200,
-    "image": "/watches/grand-seiko-snowflake-sbga211.png"
-  },
-  {
-    "id": "iwc-portugieser-chronograph",
+    "id": "iwc-portugieser-chronograph-steel-blue",
     "brand": "IWC",
-    "model": "Portugieser Chronograph",
-    "price": 8500,
-    "image": "/watches/iwc-portugieser-chronograph.png"
+    "model": "Portugieser Chronograph Steel Blue",
+    "price": 7150,
+    "image": "/watches/iwc-portugieser-chronograph-steel-blue.png"
   },
   {
-    "id": "jaeger-lecoultre-reverso-classic",
-    "brand": "Jaeger-LeCoultre",
-    "model": "Reverso Classic Medium",
-    "price": 7800,
-    "image": "/watches/jaeger-lecoultre-reverso-classic.png"
+    "id": "rolex-oyster-perpetual-41-steel-green",
+    "brand": "Rolex",
+    "model": "Oyster Perpetual 41 Steel Green",
+    "price": 12000,
+    "image": "/watches/rolex-oyster-perpetual-41-steel-green.png"
+  },
+  {
+    "id": "rolex-datejust-wimbledon-rose-gold-41",
+    "brand": "Rolex",
+    "model": "Datejust Wimbledon Rose Gold",
+    "price": 22000,
+    "image": "/watches/rolex-datejust-wimbledon-rose-gold-41.png"
+  },
+  {
+    "id": "rolex-gmt-master-ii-pepsi",
+    "brand": "Rolex",
+    "model": "GMT-Master II \"Pepsi\"",
+    "price": 28000,
+    "image": "/watches/rolex-gmt-master-ii-pepsi.png"
+  },
+  {
+    "id": "rolex-submariner-date-yellow-gold",
+    "brand": "Rolex",
+    "model": "Submariner Date",
+    "price": 33000,
+    "image": "/watches/rolex-submariner-date-yellow-gold.png"
   },
   {
     "id": "vacheron-constantin-overseas",
     "brand": "Vacheron Constantin",
     "model": "Overseas Automatic",
-    "price": 24000,
+    "price": 41300,
     "image": "/watches/vacheron-constantin-overseas.png"
   },
   {
-    "id": "a-lange-sohne-lange-1",
-    "brand": "A. Lange & Söhne",
-    "model": "Lange 1",
-    "price": 45000,
-    "image": "/watches/a-lange-sohne-lange-1.png"
+    "id": "rolex-daytona-panda",
+    "brand": "Rolex",
+    "model": "Cosmograph Daytona \"Panda\"",
+    "price": 39000,
+    "image": "/watches/rolex-daytona-panda.png"
   },
   {
-    "id": "panerai-luminor-marina",
-    "brand": "Panerai",
-    "model": "Luminor Marina",
-    "price": 7500,
-    "image": "/watches/panerai-luminor-marina.png"
+    "id": "audemars-piguet-royal-oak-15500st",
+    "brand": "Audemars Piguet",
+    "model": "Royal Oak 15500ST",
+    "price": 46200,
+    "image": "/watches/audemars-piguet-royal-oak-15500st.png"
   },
   {
-    "id": "hublot-big-bang-unico",
-    "brand": "Hublot",
-    "model": "Big Bang Unico",
-    "price": 22000,
-    "image": "/watches/hublot-big-bang-unico.png"
+    "id": "patek-philippe-aquanaut-5167",
+    "brand": "Patek Philippe",
+    "model": "Aquanaut 5167A",
+    "price": 63900,
+    "image": "/watches/patek-philippe-aquanaut-5167.png"
   },
   {
-    "id": "richard-mille-rm-011",
+    "id": "rolex-daytona-platinum-ice-blue",
+    "brand": "Rolex",
+    "model": "Cosmograph Daytona Platinum \"Ice Blue\"",
+    "price": 146700,
+    "image": "/watches/rolex-daytona-platinum-ice-blue.png"
+  },
+  {
+    "id": "patek-philippe-nautilus-moonphase",
+    "brand": "Patek Philippe",
+    "model": "Nautilus Moonphase 5712",
+    "price": 151300,
+    "image": "/watches/patek-philippe-nautilus-moonphase.png"
+  },
+  {
+    "id": "audemars-piguet-royal-oak-chrono-platinum",
+    "brand": "Audemars Piguet",
+    "model": "Royal Oak Chronograph Platinum Green",
+    "price": 217400,
+    "image": "/watches/audemars-piguet-royal-oak-chrono-platinum.png"
+  },
+  {
+    "id": "richard-mille-rm35-02-nadal",
     "brand": "Richard Mille",
-    "model": "RM 011 Felipe Massa",
-    "price": 220000,
-    "image": "/watches/richard-mille-rm-011.png"
+    "model": "RM35-02 Rafael Nadal",
+    "price": 378944,
+    "image": "/watches/richard-mille-rm35-02-nadal.png"
   },
   {
-    "id": "seiko-prospex-turtle",
-    "brand": "Seiko",
-    "model": "Prospex Turtle",
-    "price": 525,
-    "image": "/watches/seiko-prospex-turtle.png"
+    "id": "patek-philippe-nautilus-50th-platinum",
+    "brand": "Patek Philippe",
+    "model": "Nautilus 50th Anniversary Platinum",
+    "price": 442800,
+    "image": "/watches/patek-philippe-nautilus-50th-platinum.png"
+  },
+  {
+    "id": "patek-philippe-celestial-platinum-emerald-blue",
+    "brand": "Patek Philippe",
+    "model": "Celestial Platinum",
+    "price": 4116667,
+    "image": "/watches/patek-philippe-celestial-platinum-emerald-blue.png"
   }
 ]
