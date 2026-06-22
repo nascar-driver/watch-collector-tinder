@@ -1,21 +1,124 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * App is locked to a dark theme (stream-friendly), independent of OS setting.
+ * shadcn's semantic tokens are mapped to the watch.fun brand palette
+ * (Purple / Black / Gold) so every shadcn component is on-brand by default.
+ */
 :root {
-    color-scheme: dark;
-    --background: #0a0a0a;
-    --foreground: #f5ecd9;
+  color-scheme: dark;
+  --radius: 0.75rem;
+
+  /* shadcn semantic tokens → brand (dark) */
+  --background: #0a0a0a;
+  --foreground: #f5ecd9;
+  --card: #15101a;
+  --card-foreground: #f5ecd9;
+  --popover: #15101a;
+  --popover-foreground: #f5ecd9;
+  --primary: #d8b987; /* gold */
+  --primary-foreground: #0a0a0a;
+  --secondary: #3e0f28; /* purple */
+  --secondary-foreground: #f5ecd9;
+  --muted: #1c1420;
+  --muted-foreground: rgba(245, 236, 217, 0.55);
+  --accent: #2a1a24;
+  --accent-foreground: #f5ecd9;
+  --destructive: #e5484d; /* bust red */
+  --border: rgba(216, 185, 135, 0.18); /* faint gold hairline */
+  --input: rgba(216, 185, 135, 0.22);
+  --ring: #d8b987;
 }
 
 @theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --font-sans: var(--font-made-carving);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-sans: var(--font-made-carving);
+  --font-heading: var(--font-made-carving);
+
+  /* shadcn semantic color tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* watch.fun brand utilities (text-gold, bg-panel, text-buy, …) */
+  --color-gold: #d8b987;
+  --color-gold-bright: #ebcc99;
+  --color-gold-deep: #a7855b;
+  --color-purple: #3e0f28;
+  --color-purple-light: #5c1a3d;
+  --color-cream: #f5ecd9;
+  --color-buy: #1fbf75; /* positive / BUY */
+  --color-bust: #e5484d; /* lose / PASS reveal */
+  --color-panel: #15101a; /* lifted dark, purple-tinted surface */
+  --color-line: rgba(216, 185, 135, 0.18);
 }
 
-body {
-    background: var(--background);
-    color: var(--foreground);
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply text-foreground;
+    /* Eclipse-ish ambiance: purple glow up top, faint gold from below. */
+    background:
+      radial-gradient(80% 60% at 50% -15%, rgba(92, 26, 61, 0.5), transparent 70%),
+      radial-gradient(70% 50% at 50% 115%, rgba(216, 185, 135, 0.07), transparent 70%),
+      var(--background);
+    background-attachment: fixed;
     font-family: var(--font-made-carving), Arial, Helvetica, sans-serif;
     /* Brand default: Body text uses MADE CARVING Light */
     font-weight: 300;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* Gold-gradient display text (per brand titles). */
+.text-gold-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-gold-bright),
+    var(--color-gold-deep)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Brand letter-spacing for small text / buttons (5%, per Typography guideline). */
+.tracking-brand {
+  letter-spacing: 0.05em;
+}
+
+/* Scrollable area with no visible scrollbar. */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

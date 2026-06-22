@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { cn } from "@/lib/utils";
 
 // Brand typeface: MADE CARVING (per WATCH.FUN brand guidelines).
 // Body uses Light (300); titles, small text and buttons use Regular (400).
@@ -57,7 +58,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${madeCarving.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={cn("h-full antialiased font-sans", madeCarving.variable)}
+    >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
