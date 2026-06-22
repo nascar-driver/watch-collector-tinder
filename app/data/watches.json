@@ -1,0 +1,142 @@
+[
+  {
+    "id": "rolex-gmt-master-ii-batman",
+    "brand": "Rolex",
+    "model": "GMT-Master II Batman",
+    "price": 18000,
+    "image": "/watches/rolex-gmt-master-ii-batman.png"
+  },
+  {
+    "id": "rolex-submariner-date",
+    "brand": "Rolex",
+    "model": "Submariner Date",
+    "price": 14500,
+    "image": "/watches/rolex-submariner-date.png"
+  },
+  {
+    "id": "rolex-daytona-steel",
+    "brand": "Rolex",
+    "model": "Cosmograph Daytona",
+    "price": 32000,
+    "image": "/watches/rolex-daytona-steel.png"
+  },
+  {
+    "id": "omega-speedmaster-moonwatch",
+    "brand": "Omega",
+    "model": "Speedmaster Moonwatch",
+    "price": 7200,
+    "image": "/watches/omega-speedmaster-moonwatch.png"
+  },
+  {
+    "id": "omega-seamaster-diver-300m",
+    "brand": "Omega",
+    "model": "Seamaster Diver 300M",
+    "price": 5500,
+    "image": "/watches/omega-seamaster-diver-300m.png"
+  },
+  {
+    "id": "tudor-black-bay-58",
+    "brand": "Tudor",
+    "model": "Black Bay 58",
+    "price": 3800,
+    "image": "/watches/tudor-black-bay-58.png"
+  },
+  {
+    "id": "audemars-piguet-royal-oak-15500st",
+    "brand": "Audemars Piguet",
+    "model": "Royal Oak 15500ST",
+    "price": 65000,
+    "image": "/watches/audemars-piguet-royal-oak-15500st.png"
+  },
+  {
+    "id": "patek-philippe-nautilus-5711",
+    "brand": "Patek Philippe",
+    "model": "Nautilus 5711/1A",
+    "price": 120000,
+    "image": "/watches/patek-philippe-nautilus-5711.png"
+  },
+  {
+    "id": "patek-philippe-aquanaut-5167",
+    "brand": "Patek Philippe",
+    "model": "Aquanaut 5167A",
+    "price": 75000,
+    "image": "/watches/patek-philippe-aquanaut-5167.png"
+  },
+  {
+    "id": "cartier-santos-large",
+    "brand": "Cartier",
+    "model": "Santos de Cartier Large",
+    "price": 8200,
+    "image": "/watches/cartier-santos-large.png"
+  },
+  {
+    "id": "cartier-tank-must",
+    "brand": "Cartier",
+    "model": "Tank Must",
+    "price": 3400,
+    "image": "/watches/cartier-tank-must.png"
+  },
+  {
+    "id": "grand-seiko-snowflake-sbga211",
+    "brand": "Grand Seiko",
+    "model": "Snowflake SBGA211",
+    "price": 6200,
+    "image": "/watches/grand-seiko-snowflake-sbga211.png"
+  },
+  {
+    "id": "iwc-portugieser-chronograph",
+    "brand": "IWC",
+    "model": "Portugieser Chronograph",
+    "price": 8500,
+    "image": "/watches/iwc-portugieser-chronograph.png"
+  },
+  {
+    "id": "jaeger-lecoultre-reverso-classic",
+    "brand": "Jaeger-LeCoultre",
+    "model": "Reverso Classic Medium",
+    "price": 7800,
+    "image": "/watches/jaeger-lecoultre-reverso-classic.png"
+  },
+  {
+    "id": "vacheron-constantin-overseas",
+    "brand": "Vacheron Constantin",
+    "model": "Overseas Automatic",
+    "price": 24000,
+    "image": "/watches/vacheron-constantin-overseas.png"
+  },
+  {
+    "id": "a-lange-sohne-lange-1",
+    "brand": "A. Lange & Söhne",
+    "model": "Lange 1",
+    "price": 45000,
+    "image": "/watches/a-lange-sohne-lange-1.png"
+  },
+  {
+    "id": "panerai-luminor-marina",
+    "brand": "Panerai",
+    "model": "Luminor Marina",
+    "price": 7500,
+    "image": "/watches/panerai-luminor-marina.png"
+  },
+  {
+    "id": "hublot-big-bang-unico",
+    "brand": "Hublot",
+    "model": "Big Bang Unico",
+    "price": 22000,
+    "image": "/watches/hublot-big-bang-unico.png"
+  },
+  {
+    "id": "richard-mille-rm-011",
+    "brand": "Richard Mille",
+    "model": "RM 011 Felipe Massa",
+    "price": 220000,
+    "image": "/watches/richard-mille-rm-011.png"
+  },
+  {
+    "id": "seiko-prospex-turtle",
+    "brand": "Seiko",
+    "model": "Prospex Turtle",
+    "price": 525,
+    "image": "/watches/seiko-prospex-turtle.png"
+  }
+]
