@@ -30,14 +30,34 @@ export default async function OpengraphImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background:
-            "radial-gradient(circle at 50% 18%, #2a1a24 0%, #0a0a0a 60%)",
+          position: "relative",
+          // Base brand background (--background).
+          background: "#0a0a0a",
           fontFamily: "MADE CARVING",
           padding: 80,
         }}
       >
+        {/* Eclipse-ish ambiance, matching globals.css body background:
+            purple glow up top, faint gold from below. Stacked as layers
+            since Satori is unreliable with multi-image `background` strings. */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(80% 60% at 50% -15%, rgba(92, 26, 61, 0.5), transparent 70%)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(70% 50% at 50% 115%, rgba(216, 185, 135, 0.07), transparent 70%)",
+          }}
+        />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={logoDataUri} width={220} height={220} alt="" />
+        <img src={logoDataUri} width={220} height={220} alt="" style={{ zIndex: 1 }} />
         <div
           style={{
             display: "flex",
@@ -45,13 +65,14 @@ export default async function OpengraphImage() {
             fontWeight: 700,
             letterSpacing: "-0.03em",
             marginTop: 24,
+            zIndex: 1,
             background:
               "linear-gradient(90deg, #A7855B, #EBCC99 50%, #A7855B)",
             backgroundClip: "text",
             color: "transparent",
           }}
         >
-          watch.fun
+          Collector Tinder
         </div>
         <div
           style={{
@@ -61,6 +82,7 @@ export default async function OpengraphImage() {
             color: "#f5ecd9",
             opacity: 0.85,
             marginTop: 8,
+            zIndex: 1,
             textAlign: "center",
           }}
         >
