@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useGame } from "@/app/state/GameProvider";
 import { remaining } from "@/app/lib/game";
+import { encodeResult } from "@/app/lib/share";
 import { formatMoney, formatHandle } from "@/app/lib/format";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/app/components/brand/Logo";
@@ -18,7 +19,10 @@ export function EndScreen() {
 
   const handleShare = async () => {
     const summary = `I built a ${formatMoney(state.spent)} watch collection (${state.collected.length} watches) on watch.fun!`;
-    const url = typeof window !== "undefined" ? window.location.href : "";
+    const url =
+      typeof window !== "undefined"
+        ? `${window.location.origin}/c/${encodeResult(state)}`
+        : "";
     try {
       if (typeof navigator !== "undefined" && navigator.share) {
         await navigator.share({ title: "watch.fun", text: summary, url });
