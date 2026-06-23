@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
 import type { Watch } from "@/app/lib/types";
 import { formatMoney } from "@/app/lib/format";
+import { WatchImage } from "./WatchImage";
 
 /** Shared list of collected watches — used in the desktop rail and the mobile drawer. */
 export function CollectionList({ collected }: { collected: Watch[] }) {
@@ -22,9 +23,12 @@ export function CollectionList({ collected }: { collected: Watch[] }) {
             layout
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center justify-between gap-3 rounded-lg border bg-background/40 px-3 py-2"
+            className="flex items-center gap-3 rounded-lg border bg-background/40 px-3 py-2"
           >
-            <span className="min-w-0">
+            <span className="size-11 shrink-0">
+              <WatchImage watch={w} />
+            </span>
+            <span className="min-w-0 flex-1">
               <span className="block truncate text-sm text-foreground/90">
                 {w.model}
               </span>

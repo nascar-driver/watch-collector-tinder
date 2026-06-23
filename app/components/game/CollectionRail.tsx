@@ -18,7 +18,16 @@ interface CollectionRailProps {
 
 export function CollectionRail({ collected, value }: CollectionRailProps) {
   return (
-    <Card className="h-full">
+    <Card
+      className="h-full ring-0"
+      style={{
+        background: "var(--background-secondary)",
+        border: ".0625rem solid rgba(216, 185, 135, 0.28)",
+        backdropFilter: "blur(1.25rem)",
+        WebkitBackdropFilter: "blur(1.25rem)",
+        borderRadius: "1.75rem",
+      }}
+    >
       <CardHeader>
         <CardTitle className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
           Collected
