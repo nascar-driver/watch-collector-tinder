@@ -41,7 +41,7 @@ export function WatchCard({ watch, decided, onDecide, disabled }: WatchCardProps
 
   return (
     <motion.div
-      className="relative flex aspect-[3/4] w-full max-w-[320px] flex-col overflow-hidden rounded-[28px] border border-line bg-panel shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] select-none"
+      className="relative flex aspect-[5/7] w-full max-w-[340px] flex-col overflow-hidden rounded-[28px] border border-line bg-panel shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] select-none"
       style={{ x, rotate }}
       drag={disabled ? false : "x"}
       dragConstraints={{ left: 0, right: 0 }}
@@ -82,12 +82,12 @@ export function WatchCard({ watch, decided, onDecide, disabled }: WatchCardProps
       </motion.div>
 
       {/* watch image */}
-      <div className="flex flex-1 items-center justify-center p-6 pt-10">
+      <div className="flex min-h-0 flex-1 items-center justify-center p-6 pt-10">
         <WatchImage watch={watch} />
       </div>
 
       {/* info footer */}
-      <div className="border-t border-line px-6 py-5">
+      <div className="shrink-0 border-t border-line px-6 py-5">
         <div className="text-xs uppercase tracking-[0.22em] text-gold">
           {watch.brand}
         </div>
