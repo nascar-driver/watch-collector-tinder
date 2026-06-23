@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import type { Watch } from "@/app/lib/types";
 import { formatMoney } from "@/app/lib/format";
+import { AnimatedCount, AnimatedMoney } from "./AnimatedNumber";
 import { CollectionList } from "./CollectionList";
 
 interface MobileStatBarProps {
@@ -17,14 +18,16 @@ interface MobileStatBarProps {
   remaining: number;
   spent: number;
   collected: Watch[];
+  streak: number;
 }
 
-/** Compact HUD for mobile: Remaining headline, budget/spent, and a collection drawer. */
+/** Compact HUD for mobile: Remaining headline, budget/spent/streak, and a collection drawer. */
 export function MobileStatBar({
   budget,
   remaining,
   spent,
   collected,
+  streak,
 }: MobileStatBarProps) {
   return (
     <div className="rounded-2xl border bg-card/70 p-4">
@@ -33,15 +36,16 @@ export function MobileStatBar({
           <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
             Remaining
           </div>
-          <div className="text-gold-gradient text-3xl tabular-nums">
-            {formatMoney(remaining)}
-          </div>
+          <AnimatedMoney
+            value={remaining}
+            className="text-gold-gradient text-3xl tabular-nums"
+          />
         </div>
 
         <Drawer>
           <DrawerTrigger asChild>
             <Button variant="outline" size="sm" className="h-9">
-              Collected · {collected.length}
+              Collected · <AnimatedCount value={collected.length} className="tabular-nums" />
               <ChevronUp data-icon="inline-end" />
             </Button>
           </DrawerTrigger>
@@ -70,9 +74,11 @@ export function MobileStatBar({
         </span>
         <span>
           Spent{" "}
-          <span className="text-foreground/80 tabular-nums">
-            {formatMoney(spent)}
-          </span>
+          <AnimatedMoney value={spent} className="text-foreground/80 tabular-nums" />
+        </span>
+        <span>
+          Streak{" "}
+          <AnimatedCount value={streak} className="text-foreground/80 tabular-nums" />
         </span>
       </div>
     </div>

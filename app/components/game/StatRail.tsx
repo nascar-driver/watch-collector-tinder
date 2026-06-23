@@ -1,5 +1,7 @@
-import { cn } from "@/lib/utils";
-import { Card, CardContent } from "@/components/ui/card";
+"use client";
+
+import { useEffect } from "react";
+import { motion, useSpring, useTransform, type MotionValue } from "motion/react";
 import { formatMoney } from "@/app/lib/format";
 
 interface StatRailProps {
@@ -8,53 +10,104 @@ interface StatRailProps {
   spent: number;
 }
 
-function Stat({
-  label,
-  value,
-  reserveCh,
-  accent,
-}: {
-  label: string;
-  value: string;
-  /** Reserve width (in ch) for the widest possible figure, so the card never reflows. */
-  reserveCh: number;
-  accent?: boolean;
-}) {
-  return (
-    <div>
-      <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-        {label}
-      </div>
-      <div
-        style={{ minWidth: `${reserveCh}ch` }}
-        className={cn(
-          "mt-1 whitespace-nowrap tabular-nums",
-          accent ? "text-gold-gradient text-4xl" : "text-2xl text-foreground/90",
-        )}
-      >
-        {value}
-      </div>
-    </div>
-  );
+const SPRING = { stiffness: 120, damping: 26, mass: 0.6 } as const;
+
+/** A money figure that smoothly counts to its new value when it changes. */
+function useMoneySpring(value: number): MotionValue<string> {
+  const spring = useSpring(value, SPRING);
+  useEffect(() => {
+    spring.set(value);
+  }, [value, spring]);
+  return useTransform(spring, (v) => formatMoney(v));
 }
 
 export function StatRail({ budget, remaining, spent }: StatRailProps) {
-  // The largest figure shown is always the starting budget (remaining/spent ≤ budget).
-  // Reserve that width so the card stays a stable size for the whole game.
-  const reserveCh = formatMoney(budget).length;
+  const safeBudget = budget || 1;
+
+  // Drive the headline figure, the bar width and the % labels from one spring
+  // so they all glide together as the user spends.
+  const remSpring = useSpring(remaining, SPRING);
+  useEffect(() => {
+    remSpring.set(remaining);
+  }, [remaining, remSpring]);
+
+  const remainingText = useTransform(remSpring, (v) => formatMoney(v));
+  const barWidth = useTransform(remSpring, (v) =>
+    `${Math.max(0, Math.min(100, (v / safeBudget) * 100)).toFixed(2)}%`,
+  );
+  const liquidLabel = useTransform(
+    remSpring,
+    (v) => `${((Math.max(0, v) / safeBudget) * 100).toFixed(1)}% LIQUID`,
+  );
+  const spentLabel = useTransform(
+    remSpring,
+    (v) => `${(100 - (Math.max(0, v) / safeBudget) * 100).toFixed(1)}% SPENT`,
+  );
+
+  const spentText = useMoneySpring(spent);
 
   return (
-    <Card className="w-fit min-w-56">
-      <CardContent className="flex flex-col gap-7 py-2">
-        <Stat
-          label="Remaining"
-          value={formatMoney(remaining)}
-          reserveCh={reserveCh}
-          accent
+    <div
+      className="w-[360px] rounded-[1.75rem] p-6"
+      style={{
+        background: "var(--background-secondary)",
+        border: ".0625rem solid rgba(216, 185, 135, 0.28)",
+        backdropFilter: "blur(1.25rem)",
+        WebkitBackdropFilter: "blur(1.25rem)",
+      }}
+    >
+      {/* Remaining headline */}
+      <div className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
+        Remaining
+      </div>
+      <motion.div className="text-gold-gradient mt-1 text-[2.75rem] leading-none tabular-nums">
+        {remainingText}
+      </motion.div>
+
+      {/* Liquid vs spent bar */}
+      <div className="mt-5 h-2 w-full overflow-hidden rounded-full bg-[rgb(248_239_211_/_8%)]">
+        <motion.div
+          className="h-full rounded-full"
+          style={{
+            width: barWidth,
+            background:
+              "linear-gradient(90deg, #a7855b, #d8b987 55%, #ebcc99)",
+            boxShadow: "0 0 8px rgba(235, 204, 153, 0.45)",
+          }}
         />
-        <Stat label="Budget" value={formatMoney(budget)} reserveCh={reserveCh} />
-        <Stat label="Spent" value={formatMoney(spent)} reserveCh={reserveCh} />
-      </CardContent>
-    </Card>
+      </div>
+      <div className="mt-2 flex items-center justify-between text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+        <motion.span className="tabular-nums">{liquidLabel}</motion.span>
+        <motion.span className="tabular-nums">{spentLabel}</motion.span>
+      </div>
+
+      <div className="my-6 border-t border-[rgb(248_239_211_/_10%)]" />
+
+      {/* Budget / Spent footer */}
+      <div className="grid grid-cols-2">
+        <div className="pr-5">
+          <div className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
+            Budget
+          </div>
+          <div className="text-gold-gradient mt-1 text-xl tabular-nums">
+            {formatMoney(budget)}
+          </div>
+          <div className="mt-0.5 text-xs lowercase text-muted-foreground">
+            ceiling
+          </div>
+        </div>
+        <div className="border-l border-[rgb(248_239_211_/_10%)] pl-5">
+          <div className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
+            Spent
+          </div>
+          <motion.div className="text-gold-gradient mt-1 text-xl tabular-nums">
+            {spentText}
+          </motion.div>
+          <div className="mt-0.5 flex items-center gap-1 text-xs lowercase text-buy">
+            <span className="text-[0.6rem] leading-none">▲</span> portfolio
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

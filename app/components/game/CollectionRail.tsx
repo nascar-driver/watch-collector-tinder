@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { Watch } from "@/app/lib/types";
-import { formatMoney } from "@/app/lib/format";
+import { AnimatedCount, AnimatedMoney } from "./AnimatedNumber";
 import { CollectionList } from "./CollectionList";
 
 interface CollectionRailProps {
@@ -25,7 +25,7 @@ export function CollectionRail({ collected, value }: CollectionRailProps) {
         </CardTitle>
         <CardAction>
           <Badge variant="secondary" className="text-sm tabular-nums">
-            {collected.length}
+            <AnimatedCount value={collected.length} />
           </Badge>
         </CardAction>
       </CardHeader>
@@ -38,9 +38,10 @@ export function CollectionRail({ collected, value }: CollectionRailProps) {
         <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
           Collection value
         </div>
-        <div className="text-gold-gradient text-3xl tabular-nums">
-          {formatMoney(value)}
-        </div>
+        <AnimatedMoney
+          value={value}
+          className="text-gold-gradient text-3xl tabular-nums"
+        />
       </CardFooter>
     </Card>
   );
