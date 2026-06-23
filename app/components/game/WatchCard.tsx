@@ -1,10 +1,17 @@
 "use client";
 
 import { useEffect } from "react";
-import { motion, useMotionValue, useTransform, animate } from "motion/react";
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  useSpring,
+  animate,
+} from "motion/react";
 import type { Watch } from "@/app/lib/types";
 import { formatMoney } from "@/app/lib/format";
 import { WatchImage } from "./WatchImage";
+import { Logo } from "@/app/components/brand/Logo";
 
 export type Decision = "BUY" | "PASS";
 
@@ -20,11 +27,35 @@ interface WatchCardProps {
 
 const SWIPE_THRESHOLD = 110;
 
-export function WatchCard({ watch, decided, onDecide, disabled }: WatchCardProps) {
+export function WatchCard({
+  watch,
+  decided,
+  onDecide,
+  disabled,
+}: WatchCardProps) {
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-300, 300], [-16, 16]);
   const buyTint = useTransform(x, [40, 160], [0, 1]);
   const passTint = useTransform(x, [-40, -160], [0, 1]);
+
+  // Mouse-based 3D tilt — springs back to flat when the pointer leaves.
+  const tiltX = useSpring(0, { stiffness: 150, damping: 15 });
+  const tiltY = useSpring(0, { stiffness: 150, damping: 15 });
+  const MAX_TILT = 12;
+
+  const handleTilt = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (disabled) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    tiltY.set(px * MAX_TILT);
+    tiltX.set(-py * MAX_TILT);
+  };
+
+  const resetTilt = () => {
+    tiltX.set(0);
+    tiltY.set(0);
+  };
 
   // When a decision is committed, fly the card off in that direction.
   useEffect(() => {
@@ -41,8 +72,18 @@ export function WatchCard({ watch, decided, onDecide, disabled }: WatchCardProps
 
   return (
     <motion.div
-      className="relative flex aspect-[5/7] w-full max-w-[340px] flex-col overflow-hidden rounded-[28px] border border-line bg-panel shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] select-none"
-      style={{ x, rotate }}
+      className="relative flex aspect-[5/8] w-full max-w-[380px] flex-col overflow-hidden rounded-[28px] p-3 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] select-none"
+      style={{
+        x,
+        rotate,
+        rotateX: tiltX,
+        rotateY: tiltY,
+        transformPerspective: 1000,
+        background: "var(--background-secondary)",
+        backdropFilter: "blur(1.25rem)",
+        WebkitBackdropFilter: "blur(1.25rem)",
+        touchAction: "none",
+      }}
       drag={disabled ? false : "x"}
       dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.7}
@@ -51,6 +92,8 @@ export function WatchCard({ watch, decided, onDecide, disabled }: WatchCardProps
       initial={{ opacity: 0, scale: 0.92, y: 24 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 220, damping: 24 }}
+      onMouseMove={handleTilt}
+      onMouseLeave={resetTilt}
       onDragEnd={(_, info) => {
         if (disabled) return;
         if (info.offset.x > SWIPE_THRESHOLD) onDecide("BUY");
@@ -67,6 +110,11 @@ export function WatchCard({ watch, decided, onDecide, disabled }: WatchCardProps
         style={{ opacity: revealed ? (decided === "PASS" ? 1 : 0) : passTint }}
       />
 
+      {/* watch.fun logomark */}
+      <div className="pointer-events-none absolute top-5 right-5 z-20">
+        <Logo size={64} />
+      </div>
+
       {/* BUY / PASS stamps */}
       <motion.div
         className="pointer-events-none absolute top-6 left-6 z-20 -rotate-12 rounded-md border-2 border-buy px-3 py-1 text-2xl tracking-brand text-buy"
@@ -82,16 +130,21 @@ export function WatchCard({ watch, decided, onDecide, disabled }: WatchCardProps
       </motion.div>
 
       {/* watch image */}
-      <div className="flex min-h-0 flex-1 items-center justify-center p-6 pt-10">
+      <div className="pointer-events-none flex min-h-0 flex-1 items-center justify-center p-3 pt-6">
         <WatchImage watch={watch} />
       </div>
 
-      {/* info footer */}
-      <div className="shrink-0 border-t border-line px-6 py-5">
+      {/* info panel — a nested card sitting under the watch */}
+      <div
+        className="pointer-events-none shrink-0 rounded-[20px] px-5 py-4 ring-1 ring-white/5"
+        style={{ background: "rgba(8, 5, 9, 0.55)" }}
+      >
         <div className="text-xs uppercase tracking-[0.22em] text-gold">
           {watch.brand}
         </div>
-        <div className="mt-1 text-2xl leading-tight text-cream">{watch.model}</div>
+        <div className="mt-1 text-2xl leading-tight text-cream">
+          {watch.model}
+        </div>
         <div className="mt-3 text-3xl">
           {revealed ? (
             <span className={decided === "BUY" ? "text-buy" : "text-bust"}>

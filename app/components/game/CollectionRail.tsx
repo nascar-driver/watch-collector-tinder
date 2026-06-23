@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import type { Watch } from "@/app/lib/types";
 import { AnimatedCount, AnimatedMoney } from "./AnimatedNumber";
 import { CollectionList } from "./CollectionList";
@@ -14,9 +15,16 @@ import { CollectionList } from "./CollectionList";
 interface CollectionRailProps {
   collected: Watch[];
   value: number;
+  onCashOut: () => void;
+  disabled?: boolean;
 }
 
-export function CollectionRail({ collected, value }: CollectionRailProps) {
+export function CollectionRail({
+  collected,
+  value,
+  onCashOut,
+  disabled,
+}: CollectionRailProps) {
   return (
     <Card
       className="h-full ring-0"
@@ -28,7 +36,7 @@ export function CollectionRail({ collected, value }: CollectionRailProps) {
         borderRadius: "1.75rem",
       }}
     >
-      <CardHeader>
+      <CardHeader className="border-b border-line pb-4">
         <CardTitle className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
           Collected
         </CardTitle>
@@ -43,14 +51,24 @@ export function CollectionRail({ collected, value }: CollectionRailProps) {
         <CollectionList collected={collected} />
       </CardContent>
 
-      <CardFooter className="flex-col items-start gap-1">
-        <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          Collection value
+      <CardFooter className="flex-col items-stretch gap-3">
+        <div className="flex flex-col items-start gap-1">
+          <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+            Collection value
+          </div>
+          <AnimatedMoney
+            value={value}
+            className="text-gold-gradient text-3xl tabular-nums"
+          />
         </div>
-        <AnimatedMoney
-          value={value}
-          className="text-gold-gradient text-3xl tabular-nums"
-        />
+        <Button
+          onClick={onCashOut}
+          disabled={disabled}
+          className="h-12 w-full text-base"
+          aria-label="Cash out and end the game (escape)"
+        >
+          Cash Out
+        </Button>
       </CardFooter>
     </Card>
   );

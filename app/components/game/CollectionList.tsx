@@ -23,9 +23,9 @@ export function CollectionList({ collected }: { collected: Watch[] }) {
             layout
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-3 rounded-lg border bg-background/40 px-3 py-2"
+            className="flex items-center gap-3 rounded-lg border bg-background/40 px-3 py-3.5"
           >
-            <span className="size-11 shrink-0">
+            <span className="size-14 shrink-0">
               <WatchImage watch={w} />
             </span>
             <span className="min-w-0 flex-1">

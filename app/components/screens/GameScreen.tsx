@@ -10,7 +10,7 @@ import { StatRail } from "@/app/components/game/StatRail";
 import { StreakRail } from "@/app/components/game/StreakRail";
 import { CollectionRail } from "@/app/components/game/CollectionRail";
 import { MobileStatBar } from "@/app/components/game/MobileStatBar";
-import { ControlBar } from "@/app/components/game/ControlBar";
+import { SwipeHint } from "@/app/components/game/SwipeHint";
 
 /** How long the price stays revealed before advancing to the next card. */
 const REVEAL_MS = 1400;
@@ -96,11 +96,13 @@ export function GameScreen() {
             spent={state.spent}
             collected={state.collected}
             streak={state.streak}
+            onCashOut={() => dispatch({ type: "CASH_OUT" })}
+            disabled={busy}
           />
         </div>
 
         {/* center: the swipe card (single instance, shared across breakpoints) */}
-        <div className="flex flex-1 items-center justify-center">
+        <div className="relative z-20 flex flex-1 items-center justify-center">
           {watch && (
             <WatchCard
               key={watch.id}
@@ -113,19 +115,19 @@ export function GameScreen() {
         </div>
 
         {/* desktop: right collection rail */}
-        <div className="hidden lg:block lg:w-72 lg:shrink-0">
-          <CollectionRail collected={state.collected} value={state.spent} />
+        <div className="hidden lg:block lg:w-[360px] lg:shrink-0">
+          <CollectionRail
+            collected={state.collected}
+            value={state.spent}
+            onCashOut={() => dispatch({ type: "CASH_OUT" })}
+            disabled={busy}
+          />
         </div>
       </div>
 
-      {/* controls */}
+      {/* play instruction */}
       <div className="shrink-0">
-        <ControlBar
-          onPass={() => decide("PASS")}
-          onBuy={() => decide("BUY")}
-          onCashOut={() => dispatch({ type: "CASH_OUT" })}
-          disabled={busy}
-        />
+        <SwipeHint />
       </div>
     </div>
   );
