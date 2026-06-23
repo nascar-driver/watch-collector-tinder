@@ -41,6 +41,8 @@ export function GameScreen() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (state.phase !== "playing") return;
+      // Don't hijack browser shortcuts (e.g. Ctrl/Cmd+C to copy).
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
       if (e.key === "ArrowLeft") decide("PASS");
       else if (e.key === "ArrowRight" || e.key === " ") {
         e.preventDefault();
