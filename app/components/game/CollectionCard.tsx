@@ -91,7 +91,7 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 /** Cumulative-value line/area chart — the collection growing over the run. */
-function GrowthGraph({ collected }: { collected: Watch[] }) {
+function GrowthGraph({ collected, lost }: { collected: Watch[]; lost: boolean }) {
   const W = INNER_W;
   const H = 240;
 
@@ -120,11 +120,19 @@ function GrowthGraph({ collected }: { collected: Watch[] }) {
   for (const w of collected) cums.push(cums[cums.length - 1] + w.price);
   const max = cums[cums.length - 1] || 1;
   const n = cums.length;
-  const px = (i: number) => (n === 1 ? W : (i / (n - 1)) * W);
+  // Inset so strokes/dots at the edges aren't clipped by the SVG bounds
+  // (otherwise the crash line on the right edge renders at half thickness).
+  const PADX = 8;
+  const innerW = W - PADX * 2;
+  const px = (i: number) => (n === 1 ? W / 2 : PADX + (i / (n - 1)) * innerW);
   const py = (v: number) => H - 6 - (v / max) * (H - 12);
   const pts = cums.map((v, i) => [px(i), py(v)] as const);
-  const line = pts.map((p, i) => `${i ? "L" : "M"} ${p[0]} ${p[1]}`).join(" ");
-  const area = `${line} L ${W} ${H} L 0 ${H} Z`;
+  // On a ruined run, crash straight down from the peak to the baseline.
+  const peak = pts[pts.length - 1];
+  const linePts = lost ? [...pts, [peak[0], py(0)] as const] : pts;
+  const line = linePts.map((p, i) => `${i ? "L" : "M"} ${p[0]} ${p[1]}`).join(" ");
+  const lastX = linePts[linePts.length - 1][0];
+  const area = `${line} L ${lastX} ${H} L ${pts[0][0]} ${H} Z`;
 
   return (
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
@@ -317,7 +325,7 @@ export const CollectionCard = forwardRef<HTMLDivElement, CollectionCardProps>(
         {/* Portfolio growth graph */}
         <div style={{ display: "flex", flexDirection: "column", marginTop: 28, gap: 14 }}>
           <SectionLabel>Portfolio Growth</SectionLabel>
-          <GrowthGraph collected={collected} />
+          <GrowthGraph collected={collected} lost={lost} />
         </div>
 
         {/* Footer — total collection value */}

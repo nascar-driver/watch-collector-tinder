@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { WatchImage } from "@/app/components/game/WatchImage";
 import { DownloadCardModal } from "@/app/components/game/DownloadCardModal";
 
 export function EndScreen() {
@@ -69,6 +70,9 @@ export function EndScreen() {
                 <li key={w.id}>
                   <Card size="sm" className="h-full">
                     <CardContent className="flex flex-col gap-1">
+                      <div className="mb-2 flex h-24 items-center justify-center">
+                        <WatchImage watch={w} />
+                      </div>
                       <span className="text-[10px] uppercase tracking-[0.18em] text-primary/70">
                         {w.brand}
                       </span>

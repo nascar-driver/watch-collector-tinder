@@ -5,6 +5,7 @@ import { motion, useSpring } from "motion/react";
 import { toPng } from "html-to-image";
 import { Download, Loader2 } from "lucide-react";
 import type { Watch } from "@/app/lib/types";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -92,7 +93,16 @@ export function DownloadCardModal({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className={triggerClassName}>
+        <Button
+          variant="default"
+          // Same shape as "Play Again", but the Streak-card background and a
+          // simple dim on hover (kill btn-primary's gold glow with `!`).
+          className={cn(triggerClassName, "hover:opacity-80 hover:!shadow-none")}
+          style={{
+            background: "var(--background-secondary)",
+            color: "var(--foreground)",
+          }}
+        >
           Download
         </Button>
       </DialogTrigger>
