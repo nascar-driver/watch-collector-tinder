@@ -24,6 +24,8 @@ export interface GameState {
   collected: Watch[];
   /** Sum of collected prices. */
   spent: number;
+  /** Current run of consecutive BUYs (each buy +1, resets to 0 on a PASS). */
+  streak: number;
 }
 
 export type GameAction =
@@ -45,6 +47,7 @@ export function createInitialState(): GameState {
     deckIndex: 0,
     collected: [],
     spent: 0,
+    streak: 0,
   };
 }
 
@@ -86,12 +89,14 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         deckIndex: 0,
         collected: [],
         spent: 0,
+        streak: 0,
       };
     }
 
     case "PASS": {
       if (state.phase !== "playing") return state;
-      return advance(state);
+      // A PASS breaks the current buy streak.
+      return advance({ ...state, streak: 0 });
     }
 
     case "BUY": {
@@ -102,12 +107,15 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const spent = state.spent + watch.price;
       const collected = [...state.collected, watch];
 
+      // Every buy extends the current consecutive-buy streak.
+      const streakState = { ...state, streak: state.streak + 1 };
+
       // Busting the budget ends the game immediately (the watch is still kept,
       // so it shows on the "COLLECTION RUINED" screen).
       if (spent > state.startingBudget) {
-        return { ...state, collected, spent, phase: "lost" };
+        return { ...streakState, collected, spent, phase: "lost" };
       }
-      return advance({ ...state, collected, spent });
+      return advance({ ...streakState, collected, spent });
     }
 
     case "CASH_OUT": {
@@ -123,6 +131,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         deckIndex: 0,
         collected: [],
         spent: 0,
+        streak: 0,
         phase: "playing",
       };
     }

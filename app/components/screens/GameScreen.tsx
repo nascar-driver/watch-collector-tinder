@@ -7,6 +7,7 @@ import { formatHandle } from "@/app/lib/format";
 import { Logo } from "@/app/components/brand/Logo";
 import { WatchCard, type Decision } from "@/app/components/game/WatchCard";
 import { StatRail } from "@/app/components/game/StatRail";
+import { StreakRail } from "@/app/components/game/StreakRail";
 import { CollectionRail } from "@/app/components/game/CollectionRail";
 import { MobileStatBar } from "@/app/components/game/MobileStatBar";
 import { ControlBar } from "@/app/components/game/ControlBar";
@@ -77,13 +78,14 @@ export function GameScreen() {
 
       {/* main: stacks on mobile, 3-up on desktop */}
       <div className="flex min-h-0 flex-1 flex-col gap-4 lg:flex-row lg:items-stretch lg:gap-8">
-        {/* desktop: left stat rail */}
-        <div className="hidden lg:block lg:shrink-0 lg:self-center">
+        {/* desktop: left rail — budget stats + streaks */}
+        <div className="hidden lg:flex lg:shrink-0 lg:flex-col lg:gap-6 lg:self-center">
           <StatRail
             budget={state.startingBudget}
             remaining={remaining(state)}
             spent={state.spent}
           />
+          <StreakRail current={state.streak} />
         </div>
 
         {/* mobile: compact stat bar + collection drawer */}
@@ -93,6 +95,7 @@ export function GameScreen() {
             remaining={remaining(state)}
             spent={state.spent}
             collected={state.collected}
+            streak={state.streak}
           />
         </div>
 

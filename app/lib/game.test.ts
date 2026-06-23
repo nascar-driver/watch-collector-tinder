@@ -32,6 +32,7 @@ function playing(overrides: Partial<GameState> = {}): GameState {
     deckIndex: 0,
     collected: [],
     spent: 0,
+    streak: 0,
     ...overrides,
   };
 }
@@ -124,6 +125,33 @@ describe("BUY", () => {
     const s = gameReducer(playing({ deckIndex: 2 }), { type: "BUY" });
     expect(s.phase).toBe("won");
     expect(s.collected.map((c) => c.id)).toEqual(["c"]);
+  });
+});
+
+describe("streaks", () => {
+  it("increments the streak on every buy", () => {
+    let s = gameReducer(playing(), { type: "BUY" });
+    expect(s.streak).toBe(1);
+    s = gameReducer(s, { type: "BUY" });
+    expect(s.streak).toBe(2);
+    s = gameReducer(s, { type: "BUY" });
+    expect(s.streak).toBe(3);
+  });
+
+  it("resets the streak to zero on a PASS", () => {
+    let s = gameReducer(playing(), { type: "BUY" });
+    s = gameReducer(s, { type: "BUY" }); // streak 2
+    s = gameReducer(s, { type: "PASS" }); // breaks it
+    expect(s.streak).toBe(0);
+  });
+
+  it("starts counting again after a break", () => {
+    const deck = [w("a", 1), w("b", 1), w("c", 1), w("d", 1), w("e", 1)];
+    let s = playing({ deck, startingBudget: 100 });
+    s = gameReducer(s, { type: "BUY" });
+    s = gameReducer(s, { type: "PASS" }); // reset to 0
+    s = gameReducer(s, { type: "BUY" });
+    expect(s.streak).toBe(1);
   });
 });
 
