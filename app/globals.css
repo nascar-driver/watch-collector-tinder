@@ -32,6 +32,18 @@
   --border: rgba(216, 185, 135, 0.18); /* faint gold hairline */
   --input: rgba(216, 185, 135, 0.22);
   --ring: #d8b987;
+
+  /* Glass panel tokens (e.g. the setup fields card). */
+  --border-emphasized: rgb(248 239 211 / 55%);
+  --background-secondary: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    rgba(232, 231, 227, 0.1);
+
+  /* Page background gradient (black → brand purple). */
+  --bg-gradient: linear-gradient(135deg, #000, #000 25%, #3e0f28);
 }
 
 @theme inline {
@@ -82,11 +94,7 @@
   }
   body {
     @apply text-foreground;
-    /* Eclipse-ish ambiance: purple glow up top, faint gold from below. */
-    background:
-      radial-gradient(80% 60% at 50% -15%, rgba(92, 26, 61, 0.5), transparent 70%),
-      radial-gradient(70% 50% at 50% 115%, rgba(216, 185, 135, 0.07), transparent 70%),
-      var(--background);
+    background: var(--bg-gradient);
     background-attachment: fixed;
     font-family: var(--font-made-carving), Arial, Helvetica, sans-serif;
     /* Brand default: Body text uses MADE CARVING Light */
