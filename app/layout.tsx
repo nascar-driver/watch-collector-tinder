@@ -3,39 +3,39 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-// Brand typeface: MADE CARVING (per WATCH.FUN brand guidelines).
+// Brand typeface: MADE CARVING (per WATCH.FUN brand guidelines), licensed.
 // Body uses Light (300); titles, small text and buttons use Regular (400).
 const madeCarving = localFont({
   variable: "--font-made-carving",
   display: "swap",
   src: [
     {
-      path: "./fonts/MADECARVINGPersonalUse-Light.otf",
+      path: "./fonts/MADECARVING-Light.otf",
       weight: "300",
       style: "normal",
     },
     {
-      path: "./fonts/MADECARVINGPersonalUse-Regular.otf",
+      path: "./fonts/MADECARVING-Regular.otf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "./fonts/MADECARVINGPersonalUse-Medium.otf",
+      path: "./fonts/MADECARVING-Medium.otf",
       weight: "500",
       style: "normal",
     },
     {
-      path: "./fonts/MADECARVINGPersonalUse-SemiBold.otf",
+      path: "./fonts/MADECARVING-SemiBold.otf",
       weight: "600",
       style: "normal",
     },
     {
-      path: "./fonts/MADECARVINGPersonalUse-Bold.otf",
+      path: "./fonts/MADECARVING-Bold.otf",
       weight: "700",
       style: "normal",
     },
     {
-      path: "./fonts/MADECARVINGPersonalUse-Black.otf",
+      path: "./fonts/MADECARVING-Black.otf",
       weight: "900",
       style: "normal",
     },
