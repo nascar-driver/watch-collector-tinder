@@ -42,14 +42,37 @@ const madeCarving = localFont({
   ],
 });
 
+const TITLE = "watch.fun — Watch Collector Tinder";
+const DESCRIPTION =
+  "Swipe, ape, or pass. Stack the ultimate watch collection without getting rekt by your budget.🕰️";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      "https://watch-collector-tinder.vercel.app/",
+  ),
   title: {
-    default: "watch.fun — Watch Collector Tinder",
+    default: TITLE,
     template: "watch.fun — %s",
   },
-  description:
-    "Swipe, ape, or pass. Stack the ultimate watch collection without getting rekt by your budget.🕰️",
+  description: DESCRIPTION,
   applicationName: "Watch Collector Tinder",
+  openGraph: {
+    type: "website",
+    siteName: "watch.fun",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/",
+    // og:image is auto-generated from app/opengraph-image.tsx
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@watchdotfun",
+    creator: "@watchdotfun",
+    title: TITLE,
+    description: DESCRIPTION,
+    // twitter:image is auto-generated from app/twitter-image.tsx
+  },
 };
 
 export default function RootLayout({
