@@ -3,18 +3,19 @@
 import { useState } from "react";
 import { Logo } from "@/app/components/brand/Logo";
 import { LegalModal } from "@/app/components/legal/LegalModal";
+import { ContactModal } from "@/app/components/contact/ContactModal";
 import { LEGAL_DOCS, type LegalDocKey } from "@/app/data/legal";
 
 const COPYRIGHT = "© 2026 Watch.fun - All rights reserved.";
 
 type NavLink =
   | { label: string; doc: LegalDocKey }
-  | { label: string; href: string };
+  | { label: string; action: "contact" };
 
 const NAV_LINKS: readonly NavLink[] = [
   { label: "Terms of Service", doc: "terms" },
   { label: "Privacy Policy", doc: "privacy" },
-  { label: "Contact Us", href: "mailto:support@watch.fun" },
+  { label: "Contact Us", action: "contact" },
 ];
 
 const SOCIAL_LINKS = [
@@ -33,6 +34,7 @@ const SOCIAL_LINKS = [
  */
 export function Footer() {
   const [openDoc, setOpenDoc] = useState<LegalDocKey | null>(null);
+  const [contactOpen, setContactOpen] = useState(false);
 
   return (
     <>
@@ -52,22 +54,15 @@ export function Footer() {
           {NAV_LINKS.map((link, i) => (
             <div key={link.label} className="flex items-center gap-4">
               {i > 0 && <span className="h-4 w-px bg-line" aria-hidden="true" />}
-              {"doc" in link ? (
-                <button
-                  type="button"
-                  onClick={() => setOpenDoc(link.doc)}
-                  className="text-sm uppercase tracking-brand text-white transition-colors hover:text-gold"
-                >
-                  {link.label}
-                </button>
-              ) : (
-                <a
-                  href={link.href}
-                  className="text-sm uppercase tracking-brand text-white no-underline transition-colors hover:text-gold"
-                >
-                  {link.label}
-                </a>
-              )}
+              <button
+                type="button"
+                onClick={() =>
+                  "doc" in link ? setOpenDoc(link.doc) : setContactOpen(true)
+                }
+                className="cursor-pointer text-sm uppercase tracking-brand text-white transition-colors hover:text-gold"
+              >
+                {link.label}
+              </button>
             </div>
           ))}
         </nav>
@@ -102,6 +97,8 @@ export function Footer() {
         onClose={() => setOpenDoc(null)}
       />
     )}
+
+    {contactOpen && <ContactModal onClose={() => setContactOpen(false)} />}
     </>
   );
 }
