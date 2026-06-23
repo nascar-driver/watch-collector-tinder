@@ -114,6 +114,34 @@
   letter-spacing: 0.05em;
 }
 
+/* Primary button — gold-gradient pill (shadcn Button default variant). */
+.btn-primary {
+  border-radius: 999px;
+  padding: 12px 16px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  user-select: none;
+  background: linear-gradient(135deg, #d4a574, #f4e5b8 50%, #d4a574);
+  background-size: 200% 200%;
+  background-position: 0 0;
+  transition:
+    background-color 0.22s ease,
+    background-position 0.28s ease,
+    transform 0.18s ease,
+    opacity 0.18s ease,
+    box-shadow 0.18s ease;
+}
+.btn-primary:hover {
+  background-position: 100% 100%;
+  box-shadow: 0 8px 24px -8px rgba(212, 165, 116, 0.5);
+}
+
 /* Scrollable area with no visible scrollbar. */
 .scrollbar-hide {
   scrollbar-width: none;
