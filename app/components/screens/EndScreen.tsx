@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useGame } from "@/app/state/GameProvider";
 import { remaining } from "@/app/lib/game";
-import { encodeResult } from "@/app/lib/share";
 import { formatMoney, formatHandle } from "@/app/lib/format";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/app/components/brand/Logo";
@@ -11,30 +9,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { DownloadCardModal } from "@/app/components/game/DownloadCardModal";
 
 export function EndScreen() {
   const { state, dispatch } = useGame();
   const lost = state.phase === "lost";
-  const [copied, setCopied] = useState(false);
-
-  const handleShare = async () => {
-    const summary = `I built a ${formatMoney(state.spent)} watch collection (${state.collected.length} watches) on watch.fun!`;
-    const url =
-      typeof window !== "undefined"
-        ? `${window.location.origin}/c/${encodeResult(state)}`
-        : "";
-    try {
-      if (typeof navigator !== "undefined" && navigator.share) {
-        await navigator.share({ title: "watch.fun", text: summary, url });
-      } else if (typeof navigator !== "undefined" && navigator.clipboard) {
-        await navigator.clipboard.writeText(`${summary} ${url}`.trim());
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      }
-    } catch {
-      // user cancelled the share sheet, or it's unsupported — no-op
-    }
-  };
 
   return (
     <div className="flex flex-1 flex-col items-center p-4 sm:p-8">
@@ -110,30 +89,22 @@ export function EndScreen() {
           )}
         </div>
 
-        <div className="mt-10 flex flex-col items-center gap-4">
-          <div className="flex w-full max-w-xl flex-col gap-4 sm:flex-row">
-            <Button
-              variant="outline"
-              onClick={handleShare}
-              className="h-12 flex-1 text-base"
-            >
-              {copied ? "Copied!" : "Share Your Collection"}
-            </Button>
-            <Button
-              variant="ghost"
-              disabled
-              title="Coming soon"
-              className="h-12 flex-1 text-base"
-            >
-              Download Card
-            </Button>
-          </div>
+        <div className="mt-10 flex w-full max-w-md flex-col gap-4 sm:mx-auto sm:flex-row">
           <Button
             onClick={() => dispatch({ type: "RESET" })}
-            className="h-12 w-full max-w-sm px-12 text-base"
+            className="h-12 flex-1 text-base"
           >
             Play Again
           </Button>
+          <DownloadCardModal
+            name={state.guest.name}
+            handle={state.guest.xHandle}
+            budget={state.startingBudget}
+            spent={state.spent}
+            collected={state.collected}
+            lost={lost}
+            triggerClassName="h-12 flex-1 text-base"
+          />
         </div>
       </div>
     </div>
