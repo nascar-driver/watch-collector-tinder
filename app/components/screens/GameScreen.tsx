@@ -5,6 +5,7 @@ import { useGame } from "@/app/state/GameProvider";
 import { currentWatch, remaining } from "@/app/lib/game";
 import { formatHandle } from "@/app/lib/format";
 import { Logo } from "@/app/components/brand/Logo";
+import { InitialAvatar } from "@/app/components/brand/InitialAvatar";
 import { WatchCard, type Decision } from "@/app/components/game/WatchCard";
 import { StatRail } from "@/app/components/game/StatRail";
 import { StreakRail } from "@/app/components/game/StreakRail";
@@ -44,17 +45,13 @@ export function GameScreen() {
       if (state.phase !== "playing") return;
       // Don't hijack browser shortcuts (e.g. Ctrl/Cmd+C to copy).
       if (e.ctrlKey || e.metaKey || e.altKey) return;
+      // Only the arrow keys drive the game: left = PASS, right = BUY.
       if (e.key === "ArrowLeft") decide("PASS");
-      else if (e.key === "ArrowRight" || e.key === " ") {
-        e.preventDefault();
-        decide("BUY");
-      } else if (e.key === "Escape" || e.key.toLowerCase() === "c") {
-        if (!decision) dispatch({ type: "CASH_OUT" });
-      }
+      else if (e.key === "ArrowRight") decide("BUY");
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [state.phase, decide, dispatch, decision]);
+  }, [state.phase, decide]);
 
   const busy = decision !== null;
 
@@ -63,16 +60,19 @@ export function GameScreen() {
       {/* header */}
       <header className="flex shrink-0 items-center justify-between gap-3">
         <Logo size={28} withWordmark />
-        <div className="min-w-0 text-right">
-          <div className="hidden text-sm uppercase tracking-[0.3em] text-primary sm:block">
-            Collector Tinder
+        <div className="flex min-w-0 items-center gap-3">
+          <div className="min-w-0 text-right">
+            <div className="hidden text-sm uppercase tracking-[0.3em] text-primary sm:block">
+              Collector Tinder
+            </div>
+            <div className="truncate text-sm text-muted-foreground">
+              {state.guest.name}
+              {state.guest.xHandle ? (
+                <span className="opacity-70"> · {formatHandle(state.guest.xHandle)}</span>
+              ) : null}
+            </div>
           </div>
-          <div className="truncate text-sm text-muted-foreground">
-            {state.guest.name}
-            {state.guest.xHandle ? (
-              <span className="opacity-70"> · {formatHandle(state.guest.xHandle)}</span>
-            ) : null}
-          </div>
+          <InitialAvatar name={state.guest.name} size={36} />
         </div>
       </header>
 

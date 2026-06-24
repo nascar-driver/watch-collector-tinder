@@ -5,6 +5,7 @@ import { remaining } from "@/app/lib/game";
 import { formatMoney, formatHandle } from "@/app/lib/format";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/app/components/brand/Logo";
+import { InitialAvatar } from "@/app/components/brand/InitialAvatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -20,11 +21,14 @@ export function EndScreen() {
     <div className="flex flex-1 flex-col items-center p-4 sm:p-8">
       <header className="flex w-full max-w-4xl items-center justify-between">
         <Logo size={32} withWordmark />
-        <div className="text-right text-muted-foreground">
-          {state.guest.name}
-          {state.guest.xHandle ? (
-            <span className="opacity-70"> · {formatHandle(state.guest.xHandle)}</span>
-          ) : null}
+        <div className="flex items-center gap-3 text-muted-foreground">
+          <div className="text-right">
+            {state.guest.name}
+            {state.guest.xHandle ? (
+              <span className="opacity-70"> · {formatHandle(state.guest.xHandle)}</span>
+            ) : null}
+          </div>
+          <InitialAvatar name={state.guest.name} size={40} />
         </div>
       </header>
 

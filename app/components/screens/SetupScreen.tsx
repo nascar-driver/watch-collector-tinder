@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check } from "lucide-react";
+import { Check, RotateCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useGame } from "@/app/state/GameProvider";
 import { Logo } from "@/app/components/brand/Logo";
@@ -10,12 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-  InputGroupText,
-} from "@/components/ui/input-group";
+import { AnimatedMoney } from "@/app/components/game/AnimatedNumber";
 
 /** Headline budget tiers, picked as cards (like preset chips). */
 const BUDGET_TIERS = [
@@ -41,6 +36,9 @@ const BUDGET_TIERS = [
 
 /** Quick-add increments for fine-tuning the custom budget. */
 const BUDGET_STEPS = [1000, 10000, 100000];
+
+/** Hard ceiling on the starting budget. */
+const MAX_BUDGET = 10_000_000;
 
 export function SetupScreen() {
   const { state, dispatch } = useGame();
@@ -104,7 +102,7 @@ export function SetupScreen() {
                   id="guest-name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Jane Collector"
+                  placeholder="Collector"
                   autoFocus
                   className="h-11 text-base"
                 />
@@ -115,8 +113,11 @@ export function SetupScreen() {
                 <Input
                   id="x-handle"
                   value={xHandle}
-                  onChange={(e) => setXHandle(e.target.value)}
-                  placeholder="@janecollector"
+                  onChange={(e) =>
+                    setXHandle(e.target.value.replace(/\s/g, "").slice(0, 20))
+                  }
+                  maxLength={20}
+                  placeholder="@collector"
                   className="h-11 text-base"
                 />
               </Field>
@@ -175,34 +176,70 @@ export function SetupScreen() {
                   })}
                 </div>
 
-                <InputGroup className="h-11">
-                  <InputGroupAddon>
-                    <InputGroupText className="text-primary">$</InputGroupText>
-                  </InputGroupAddon>
-                  <InputGroupInput
-                    id="budget"
-                    type="number"
-                    min={1}
-                    value={budget || ""}
-                    onChange={(e) => setBudget(Number(e.target.value))}
-                    className="text-base tabular-nums"
+                {/* Read-only running total — counts up like the Remaining card */}
+                <div
+                  id="budget"
+                  aria-live="polite"
+                  className="relative flex h-14 items-center justify-center rounded-2xl border border-[rgb(248_239_211_/_12%)] bg-[rgb(248_239_211_/_4%)]"
+                >
+                  <AnimatedMoney
+                    value={budget}
+                    className="text-gold-gradient text-3xl leading-none tabular-nums"
                   />
-                </InputGroup>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setBudget(0);
+                      setSelectedTier(null);
+                    }}
+                    disabled={budget <= 0}
+                    aria-label="Reset budget"
+                    className="absolute right-3 flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-[rgb(248_239_211_/_8%)] hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
+                  >
+                    <RotateCcw className="size-4" />
+                  </button>
+                </div>
 
                 <div className="grid grid-cols-3 gap-2">
                   {BUDGET_STEPS.map((step) => (
                     <Button
-                      key={step}
+                      key={`add-${step}`}
                       type="button"
                       variant="outline"
                       size="sm"
-                      onClick={() => setBudget((b) => (b || 0) + step)}
+                      disabled={budget >= MAX_BUDGET}
+                      onClick={() =>
+                        setBudget((b) => Math.min(MAX_BUDGET, (b || 0) + step))
+                      }
                       className="border-[rgb(248_239_211_/_12%)] bg-transparent hover:bg-[rgb(248_239_211_/_8%)]"
                     >
                       +{formatMoney(step)}
                     </Button>
                   ))}
                 </div>
+
+                <div className="grid grid-cols-3 gap-2">
+                  {BUDGET_STEPS.map((step) => (
+                    <Button
+                      key={`sub-${step}`}
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      disabled={budget <= 0}
+                      onClick={() =>
+                        setBudget((b) => Math.max(0, (b || 0) - step))
+                      }
+                      className="border-[rgb(248_239_211_/_12%)] bg-transparent text-muted-foreground hover:bg-[rgb(248_239_211_/_8%)]"
+                    >
+                      &minus;{formatMoney(step)}
+                    </Button>
+                  ))}
+                </div>
+                {budget >= MAX_BUDGET && (
+                  <p className="text-center text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                    Maximum budget reached · {formatMoney(MAX_BUDGET)}
+                  </p>
+                )}
               </Field>
 
               <Button
