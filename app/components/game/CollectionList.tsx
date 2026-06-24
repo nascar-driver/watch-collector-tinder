@@ -15,7 +15,10 @@ export function CollectionList({ collected }: { collected: Watch[] }) {
   }
 
   return (
-    <ul className="flex flex-col gap-2">
+    // `perspective` lets each row lift toward the viewer on hover (translateZ).
+    // `py` gives the lifted top/bottom rows room so the scroll container's
+    // overflow clip doesn't shave them.
+    <ul className="flex flex-col gap-2 py-1.5" style={{ perspective: 600 }}>
       <AnimatePresence initial={false}>
         {collected.map((w) => (
           <motion.li
@@ -23,7 +26,16 @@ export function CollectionList({ collected }: { collected: Watch[] }) {
             layout
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-3 rounded-lg border bg-background/40 px-3 py-3.5"
+            whileHover={{
+              z: 18,
+              zIndex: 10,
+              boxShadow: "0 14px 28px -10px rgba(0,0,0,0.75)",
+            }}
+            // Tween (no spring overshoot) + own GPU layer keeps text from
+            // re-rasterizing/wiggling as the row lifts.
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            style={{ willChange: "transform", backfaceVisibility: "hidden" }}
+            className="relative flex items-center gap-3 rounded-lg border bg-background/40 px-3 py-3.5"
           >
             <span className="size-14 shrink-0">
               <WatchImage watch={w} />
