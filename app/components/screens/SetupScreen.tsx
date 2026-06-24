@@ -17,42 +17,38 @@ import { AnimatedMoney } from "@/app/components/game/AnimatedNumber";
 /** Headline budget tiers, picked as cards (like preset chips). */
 const BUDGET_TIERS = [
   {
-    value: 25000,
-    name: "Bargain",
-    display: "$25K",
-    blurb: "hunt for hidden gems",
+    value: 500_000,
+    name: "Collector",
+    display: "$500K",
+    blurb: "pick your battles",
   },
   {
-    value: 50000,
-    name: "Enthusiast",
-    display: "$50K",
-    blurb: "a balanced cellar",
+    value: 1_000_000,
+    name: "Connoisseur",
+    display: "$1M",
+    blurb: "a serious cellar",
   },
   {
-    value: 100000,
+    value: 10_000_000,
     name: "Whale",
-    display: "$100K",
-    blurb: "buy what moves you",
+    display: "$10M",
+    blurb: "buy the whole vault",
   },
 ] as const;
 
-/** Quick-add increments for fine-tuning the custom budget. */
-const BUDGET_STEPS = [1000, 10000, 100000];
-
-/** Hard ceiling on the starting budget. */
-const MAX_BUDGET = 10_000_000;
+/** Smaller preset budget options, two rows of selectable chips. */
+const BUDGET_OPTIONS = [
+  [25_000, 50_000, 100_000],
+  [1_000, 5_000, 10_000],
+];
 
 export function SetupScreen() {
   const { state, dispatch } = useGame();
   const [name, setName] = useState(state.guest.name);
   const [xHandle, setXHandle] = useState(state.guest.xHandle);
-  const [budget, setBudget] = useState<number>(state.startingBudget || 50000);
-  // Which tier card is "focused". Sticky: only changes when a card is picked,
-  // not when the amount is incremented or typed.
-  const [selectedTier, setSelectedTier] = useState<number | null>(() => {
-    const initial = state.startingBudget || 50000;
-    return BUDGET_TIERS.some((t) => t.value === initial) ? initial : null;
-  });
+  const [budget, setBudget] = useState<number>(
+    state.startingBudget || 1_000_000,
+  );
 
   // Preload the catalogue while the guest fills out the form, so the very
   // first card paints instantly once the game starts.
@@ -133,16 +129,13 @@ export function SetupScreen() {
 
                 <div className="grid grid-cols-3 gap-2">
                   {BUDGET_TIERS.map((tier, i) => {
-                    const selected = selectedTier === tier.value;
+                    const selected = budget === tier.value;
                     return (
                       <button
                         key={tier.value}
                         type="button"
                         aria-pressed={selected}
-                        onClick={() => {
-                          setSelectedTier(tier.value);
-                          setBudget(tier.value);
-                        }}
+                        onClick={() => setBudget(tier.value)}
                         className={cn(
                           "relative flex flex-col items-center gap-1.5 rounded-2xl border px-2 py-3 text-center transition-colors",
                           selected
@@ -194,10 +187,7 @@ export function SetupScreen() {
                   />
                   <button
                     type="button"
-                    onClick={() => {
-                      setBudget(0);
-                      setSelectedTier(null);
-                    }}
+                    onClick={() => setBudget(0)}
                     disabled={budget <= 0}
                     aria-label="Reset budget"
                     className="absolute right-3 flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-[rgb(248_239_211_/_8%)] hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
@@ -206,46 +196,34 @@ export function SetupScreen() {
                   </button>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2">
-                  {BUDGET_STEPS.map((step) => (
-                    <Button
-                      key={`add-${step}`}
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      disabled={budget >= MAX_BUDGET}
-                      onClick={() =>
-                        setBudget((b) => Math.min(MAX_BUDGET, (b || 0) + step))
-                      }
-                      className="border-[rgb(248_239_211_/_12%)] bg-transparent hover:bg-[rgb(248_239_211_/_8%)]"
-                    >
-                      +{formatMoney(step)}
-                    </Button>
-                  ))}
-                </div>
-
-                <div className="grid grid-cols-3 gap-2">
-                  {BUDGET_STEPS.map((step) => (
-                    <Button
-                      key={`sub-${step}`}
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      disabled={budget <= 0}
-                      onClick={() =>
-                        setBudget((b) => Math.max(0, (b || 0) - step))
-                      }
-                      className="border-[rgb(248_239_211_/_12%)] bg-transparent text-muted-foreground hover:bg-[rgb(248_239_211_/_8%)]"
-                    >
-                      &minus;{formatMoney(step)}
-                    </Button>
-                  ))}
-                </div>
-                {budget >= MAX_BUDGET && (
-                  <p className="text-center text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                    Maximum budget reached · {formatMoney(MAX_BUDGET)}
-                  </p>
-                )}
+                {BUDGET_OPTIONS.map((row, r) => (
+                  <div key={`row-${r}`} className="grid grid-cols-3 gap-2">
+                    {row.map((option) => {
+                      const selected = budget === option;
+                      return (
+                        <button
+                          key={option}
+                          type="button"
+                          aria-pressed={selected}
+                          onClick={() => setBudget(option)}
+                          className={cn(
+                            "relative flex items-center justify-center rounded-2xl border px-2 py-2.5 text-sm tabular-nums transition-colors",
+                            selected
+                              ? "border-primary bg-[rgb(248_239_211_/_8%)] text-foreground"
+                              : "border-[rgb(248_239_211_/_12%)] text-muted-foreground hover:bg-[rgb(248_239_211_/_8%)]",
+                          )}
+                        >
+                          {selected && (
+                            <span className="absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                              <Check className="size-3" />
+                            </span>
+                          )}
+                          {formatMoney(option)}
+                        </button>
+                      );
+                    })}
+                  </div>
+                ))}
               </Field>
 
               <Button
