@@ -23,7 +23,7 @@ export function EndScreen() {
   return (
     <div className="flex flex-1 flex-col items-center p-4 sm:p-8">
       <header className="flex w-full max-w-4xl items-center justify-between">
-        <Logo size={32} withWordmark />
+        <Logo size={32} withWordmark href="https://watch.fun" />
         <div className="flex items-center gap-3 text-muted-foreground">
           <div className="text-right">
             {state.guest.name}

@@ -7,6 +7,8 @@ interface LogoProps {
   size?: number;
   /** Show the "watch.fun" wordmark next to the mark. */
   withWordmark?: boolean;
+  /** When set, the logo becomes a link (used in nav headers). */
+  href?: string;
   className?: string;
 }
 
@@ -15,14 +17,26 @@ interface LogoProps {
  * Keeps the brand gold gradient; ids are made unique per-instance via useId
  * so multiple logos on a page don't collide on mask/gradient ids.
  */
-export function Logo({ size = 36, withWordmark = false, className }: LogoProps) {
+export function Logo({
+  size = 36,
+  withWordmark = false,
+  href,
+  className,
+}: LogoProps) {
   const uid = useId().replace(/[:]/g, "");
   const clip = `logo-clip-${uid}`;
   const mask = `logo-mask-${uid}`;
   const grad = `logo-grad-${uid}`;
 
+  const Tag = href ? "a" : "span";
+
   return (
-    <span className={`inline-flex items-center gap-3 ${className ?? ""}`}>
+    <Tag
+      {...(href ? { href, "aria-label": "watch.fun" } : {})}
+      className={`inline-flex items-center gap-3 ${
+        href ? "transition-opacity hover:opacity-80" : ""
+      } ${className ?? ""}`}
+    >
       <svg
         width={size}
         height={size}
@@ -75,6 +89,6 @@ export function Logo({ size = 36, withWordmark = false, className }: LogoProps) 
           watch.fun
         </span>
       )}
-    </span>
+    </Tag>
   );
 }

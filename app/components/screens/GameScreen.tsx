@@ -70,7 +70,7 @@ export function GameScreen() {
     <div className="flex min-h-dvh flex-col gap-4 p-4 lg:h-dvh lg:gap-6 lg:overflow-hidden lg:p-8">
       {/* header */}
       <header className="flex shrink-0 items-center justify-between gap-3">
-        <Logo size={28} withWordmark />
+        <Logo size={28} withWordmark href="https://watch.fun" />
         <div className="flex min-w-0 items-center gap-3">
           <div className="min-w-0 text-right">
             <div className="hidden text-sm uppercase tracking-[0.3em] text-primary sm:block">
