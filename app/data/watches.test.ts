@@ -23,6 +23,7 @@ describe("watches catalogue", () => {
       expect(w.brand).toBeTruthy();
       expect(w.model).toBeTruthy();
       expect(w.image).toBeTruthy();
+      expect(w.history).toBeTruthy();
       expect(w.price).toBeGreaterThan(0);
     }
   });

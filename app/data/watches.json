@@ -4,35 +4,40 @@
     "brand": "Casio",
     "model": "F-91W",
     "price": 20,
-    "image": "/watches/casio-f91w.png"
+    "image": "/watches/casio-f91w.png",
+    "history": "Introduced in 1989 and barely changed since, the F-91W bundled a stopwatch, alarm and micro-light into a featherweight resin case. With well over 100 million sold, it is the best-selling watch ever made."
   },
   {
     "id": "seiko-5-sports-srpd63k",
     "brand": "Seiko",
     "model": "SEIKO 5 SPORTS AUTOMATIC SRPD63K",
     "price": 250,
-    "image": "/watches/seiko-5-sports-srpd63k.png"
+    "image": "/watches/seiko-5-sports-srpd63k.png",
+    "history": "The Seiko 5 traces to 1963's Sportsmatic 5, the first Japanese automatic day-date. The tougher Sports line arrived in 1968, and this modern SRPD generation relaunched the icon as an affordable mechanical workhorse."
   },
   {
     "id": "swatch-moonswatch-moon-so33m100",
     "brand": "Swatch",
     "model": "MoonSwatch Mission to the Moon",
     "price": 270,
-    "image": "/watches/swatch-moonswatch-moon.png"
+    "image": "/watches/swatch-moonswatch-moon.png",
+    "history": "Launched in March 2022, the Omega x Swatch Bioceramic MoonSwatch is a playful, accessible tribute to the Speedmaster Moonwatch. 'Mission to the Moon' hews closest to the original and set off worldwide queues on release day."
   },
   {
     "id": "apple-watch-ultra-2",
     "brand": "Apple",
     "model": "Watch Ultra 2",
     "price": 400,
-    "image": "/watches/apple-watch-ultra-2.png"
+    "image": "/watches/apple-watch-ultra-2.png",
+    "history": "Apple's rugged flagship, unveiled in September 2023. The 49mm titanium Ultra 2 added Apple's brightest-ever display, the S9 chip and the new double-tap gesture, aimed at divers, hikers and endurance athletes."
   },
   {
     "id": "garmin-fenix-7-sapphire-solar",
     "brand": "Garmin",
     "model": "fēnix 7 Sapphire Solar",
     "price": 400,
-    "image": "/watches/garmin-fenix-7-sapphire-solar.png"
+    "image": "/watches/garmin-fenix-7-sapphire-solar.png",
+    "history": "Released in 2022, the fēnix 7 is Garmin's rugged multisport flagship — solar charging, 30-plus sport modes, multi-band GPS and weeks of battery — built to outlast the wilderness rather than the boardroom."
   },
 
   {
@@ -40,146 +45,167 @@
     "brand": "Bulgari",
     "model": "Aluminium",
     "price": 3300,
-    "image": "/watches/bulgari-aluminium.png"
+    "image": "/watches/bulgari-aluminium.png",
+    "history": "First shown in 1998, the Aluminium paired a lightweight aluminium case with rubber and the BVLGARI•BVLGARI bezel — a modernist statement that even adorned an Alitalia jumbo jet. It returned in 2020 with a mechanical movement."
   },
   {
     "id": "cartier-tank-must-steel-black",
     "brand": "Cartier",
     "model": "Tank Must Steel Black",
     "price": 3350,
-    "image": "/watches/cartier-tank-must-steel-black.png"
+    "image": "/watches/cartier-tank-must-steel-black.png",
+    "history": "Louis Cartier designed the Tank in 1917, its lines drawn from the tracks of a WWI Renault tank. The Must de Cartier range, born in 1977, made the icon more attainable — a tradition this monochrome Tank Must continues."
   },
   {
     "id": "tudor-black-bay-58-steel-black",
     "brand": "Tudor",
     "model": "Black Bay 58 Steel Black",
     "price": 3350,
-    "image": "/watches/tudor-black-bay-58-steel-black.png"
+    "image": "/watches/tudor-black-bay-58-steel-black.png",
+    "history": "Named for 1958 — the year Tudor's first 200m diver, the 'Big Crown' ref. 7924, appeared — the Black Bay 58 launched in 2018 with vintage 39mm proportions and gilt detailing that nod to Tudor's mid-century divers."
   },
   {
     "id": "omega-seamaster-diver-300m-steel-black",
     "brand": "Omega",
     "model": "Seamaster Diver 300M",
     "price": 5050,
-    "image": "/watches/omega-seamaster-diver-300m.png"
+    "image": "/watches/omega-seamaster-diver-300m.png",
+    "history": "Introduced in 1993 with its wave dial and helium-escape valve, the Seamaster Diver 300M became a cultural icon when Pierce Brosnan's James Bond wore it in 1995's GoldenEye — a partnership that has continued in every Bond film since."
   },
   {
     "id": "omega-speedmaster-moonwatch",
     "brand": "Omega",
     "model": "Speedmaster Moonwatch",
     "price": 6000,
-    "image": "/watches/omega-speedmaster-moonwatch.png"
+    "image": "/watches/omega-speedmaster-moonwatch.png",
+    "history": "Qualified by NASA for spaceflight in 1965, the Speedmaster was on Buzz Aldrin's wrist on the lunar surface during Apollo 11 in 1969 — the first watch worn on the Moon, and forever 'the Moonwatch.'"
   },
   {
     "id": "cartier-santos-large",
     "brand": "Cartier",
     "model": "Santos de Cartier Large",
     "price": 8800,
-    "image": "/watches/cartier-santos-large.png"
+    "image": "/watches/cartier-santos-large.png",
+    "history": "Created by Louis Cartier in 1904 for aviator Alberto Santos-Dumont, who wanted to read the time without letting go of the controls, the Santos is among the very first purpose-built wristwatches — and the first pilot's watch."
   },
   {
     "id": "iwc-portugieser-chronograph-steel-blue",
     "brand": "IWC",
     "model": "Portugieser Chronograph Steel Blue",
     "price": 7150,
-    "image": "/watches/iwc-portugieser-chronograph-steel-blue.png"
+    "image": "/watches/iwc-portugieser-chronograph-steel-blue.png",
+    "history": "Born in 1939 when two Portuguese merchants asked IWC for a wristwatch as precise as a marine chronometer, the Portugieser's large case and clean dial pioneered the oversized watch decades before its time."
   },
   {
     "id": "rolex-oyster-perpetual-41-steel-green",
     "brand": "Rolex",
     "model": "Oyster Perpetual 41 Steel Green",
     "price": 12000,
-    "image": "/watches/rolex-oyster-perpetual-41-steel-green.png"
+    "image": "/watches/rolex-oyster-perpetual-41-steel-green.png",
+    "history": "The Oyster Perpetual unites Rolex's two foundational inventions — the waterproof Oyster case of 1926 and the self-winding Perpetual rotor of 1931 — in its purest, no-date form."
   },
   {
     "id": "rolex-datejust-wimbledon-rose-gold-41",
     "brand": "Rolex",
-    "model": "Datejust Wimbledon Rose Gold",
+    "model": "Datejust \"Wimbledon\" Rose Gold",
     "price": 22000,
-    "image": "/watches/rolex-datejust-wimbledon-rose-gold-41.png"
+    "image": "/watches/rolex-datejust-wimbledon-rose-gold-41.png",
+    "history": "Launched in 1945 for Rolex's 40th anniversary, the Datejust was the first self-winding wristwatch with a date that clicks over at midnight. The 'Wimbledon' nickname comes from its green Roman-numeral dial."
   },
   {
     "id": "rolex-gmt-master-ii-pepsi",
     "brand": "Rolex",
     "model": "GMT-Master II \"Pepsi\"",
     "price": 28000,
-    "image": "/watches/rolex-gmt-master-ii-pepsi.png"
+    "image": "/watches/rolex-gmt-master-ii-pepsi.png",
+    "history": "Developed with Pan Am in 1955 so pilots could read two time zones at once, the GMT-Master earned its 'Pepsi' nickname from the red-and-blue 24-hour bezel that mirrored the airline's livery."
   },
   {
     "id": "rolex-submariner-date-yellow-gold",
     "brand": "Rolex",
     "model": "Submariner Date",
     "price": 33000,
-    "image": "/watches/rolex-submariner-date-yellow-gold.png"
+    "image": "/watches/rolex-submariner-date-yellow-gold.png",
+    "history": "Introduced in 1953 as the first dive watch waterproof to 100 metres, the Submariner's rotating timing bezel and luminous dial set the template that every diver since has followed."
   },
   {
     "id": "vacheron-constantin-overseas",
     "brand": "Vacheron Constantin",
     "model": "Overseas Automatic",
     "price": 41300,
-    "image": "/watches/vacheron-constantin-overseas.png"
+    "image": "/watches/vacheron-constantin-overseas.png",
+    "history": "Launched in 1996, the Overseas descends from the 1977 '222' — Vacheron's first luxury sports watch — carrying its Maltese-cross-inspired bezel into the modern era."
   },
   {
     "id": "rolex-daytona-panda",
     "brand": "Rolex",
     "model": "Cosmograph Daytona \"Panda\"",
     "price": 39000,
-    "image": "/watches/rolex-daytona-panda.png"
+    "image": "/watches/rolex-daytona-panda.png",
+    "history": "Rolex's racing chronograph, launched in 1963 and named for the Daytona Speedway it timed. The 'Panda' nickname comes from its white dial and contrasting black sub-dials, echoing the famed Paul Newman Daytonas."
   },
   {
     "id": "audemars-piguet-royal-oak-15500st",
     "brand": "Audemars Piguet",
     "model": "Royal Oak 15500ST",
     "price": 46200,
-    "image": "/watches/audemars-piguet-royal-oak-15500st.png"
+    "image": "/watches/audemars-piguet-royal-oak-15500st.png",
+    "history": "Sketched overnight by Gérald Genta and unveiled in 1972, the Royal Oak's octagonal, screw-set bezel made luxury steel desirable and birthed the integrated sports watch. The 15500ST is its modern core model."
   },
   {
     "id": "patek-philippe-aquanaut-5167",
     "brand": "Patek Philippe",
     "model": "Aquanaut 5167A",
     "price": 63900,
-    "image": "/watches/patek-philippe-aquanaut-5167.png"
+    "image": "/watches/patek-philippe-aquanaut-5167.png",
+    "history": "Introduced in 1997 as a younger, sportier sibling to the Nautilus, the Aquanaut paired a rounded octagonal case with an innovative 'Tropical' rubber strap — Patek's bid to win over a new generation."
   },
   {
     "id": "rolex-daytona-platinum-ice-blue",
     "brand": "Rolex",
     "model": "Cosmograph Daytona Platinum \"Ice Blue\"",
     "price": 146700,
-    "image": "/watches/rolex-daytona-platinum-ice-blue.png"
+    "image": "/watches/rolex-daytona-platinum-ice-blue.png",
+    "history": "The first platinum Cosmograph Daytona, introduced in 2013 for the model's 50th anniversary. Its ice-blue dial — a shade Rolex reserves exclusively for platinum — and chestnut Cerachrom bezel earned it the 'Platona' nickname."
   },
   {
     "id": "patek-philippe-nautilus-moonphase",
     "brand": "Patek Philippe",
     "model": "Nautilus Moonphase 5712",
     "price": 151300,
-    "image": "/watches/patek-philippe-nautilus-moonphase.png"
+    "image": "/watches/patek-philippe-nautilus-moonphase.png",
+    "history": "Gérald Genta sketched the Nautilus in 1974 — inspired by a ship's porthole — and Patek launched it in 1976 as its first steel sports watch. The 5712 layers a moonphase, power reserve and date onto the icon."
   },
   {
     "id": "audemars-piguet-royal-oak-chrono-platinum",
     "brand": "Audemars Piguet",
     "model": "Royal Oak Chronograph Platinum Green",
     "price": 217400,
-    "image": "/watches/audemars-piguet-royal-oak-chrono-platinum.png"
+    "image": "/watches/audemars-piguet-royal-oak-chrono-platinum.png",
+    "history": "A chronograph evolution of Gérald Genta's 1972 Royal Oak — the watch that made luxury steel — here rendered in precious platinum with the signature octagonal bezel and 'Tapisserie' dial."
   },
   {
     "id": "richard-mille-rm35-02-nadal",
     "brand": "Richard Mille",
     "model": "RM35-02 Rafael Nadal",
     "price": 378944,
-    "image": "/watches/richard-mille-rm35-02-nadal.png"
+    "image": "/watches/richard-mille-rm35-02-nadal.png",
+    "history": "Born from Richard Mille's partnership with Rafael Nadal, who wears his on court, the RM35-02 packs an automatic movement into a sub-50-gram Carbon TPT case engineered to shrug off 10,000 Gs of shock."
   },
   {
     "id": "patek-philippe-nautilus-50th-platinum",
     "brand": "Patek Philippe",
     "model": "Nautilus 50th Anniversary Platinum",
     "price": 442800,
-    "image": "/watches/patek-philippe-nautilus-50th-platinum.png"
+    "image": "/watches/patek-philippe-nautilus-50th-platinum.png",
+    "history": "A platinum tribute marking the Nautilus's 50 years, celebrating Gérald Genta's porthole-inspired 1976 original — the steel sports watch that turned a conservative maison into a collector legend."
   },
   {
     "id": "patek-philippe-celestial-platinum-emerald-blue",
     "brand": "Patek Philippe",
     "model": "Celestial Platinum",
     "price": 4116667,
-    "image": "/watches/patek-philippe-celestial-platinum-emerald-blue.png"
+    "image": "/watches/patek-philippe-celestial-platinum-emerald-blue.png",
+    "history": "Patek's celestial sky-chart complication descends from astronomical pieces the maison built in the 1920s. It reached the wrist around the millennium, its rotating star map tracing the night sky as seen over Geneva."
   }
 ]

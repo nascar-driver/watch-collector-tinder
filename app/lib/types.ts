@@ -11,4 +11,9 @@ export interface Watch {
    * placeholder when the image is missing/unavailable.
    */
   image: string;
+  /**
+   * Short provenance blurb shown in the card's history tooltip. Keep it to a
+   * sentence or two and never reveal the price (the price is the game).
+   */
+  history: string;
 }

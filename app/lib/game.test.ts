@@ -17,6 +17,7 @@ const w = (id: string, price: number): Watch => ({
   model: id,
   price,
   image: "",
+  history: "",
 });
 
 const guest = { name: "Ada", xHandle: "@ada" };
