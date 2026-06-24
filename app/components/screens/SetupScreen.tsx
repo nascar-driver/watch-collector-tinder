@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Check, RotateCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useGame } from "@/app/state/GameProvider";
+import { watches } from "@/app/data/watches";
+import { usePreloadImages } from "@/app/lib/usePreloadImages";
 import { Logo } from "@/app/components/brand/Logo";
 import { formatMoney } from "@/app/lib/format";
 import { Button } from "@/components/ui/button";
@@ -51,6 +53,10 @@ export function SetupScreen() {
     const initial = state.startingBudget || 50000;
     return BUDGET_TIERS.some((t) => t.value === initial) ? initial : null;
   });
+
+  // Preload the catalogue while the guest fills out the form, so the very
+  // first card paints instantly once the game starts.
+  usePreloadImages(watches);
 
   const canStart = name.trim().length > 0 && budget > 0;
 

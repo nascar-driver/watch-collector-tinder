@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useGame } from "@/app/state/GameProvider";
 import { currentWatch, remaining } from "@/app/lib/game";
+import { usePreloadImages } from "@/app/lib/usePreloadImages";
 import { formatHandle } from "@/app/lib/format";
 import { Logo } from "@/app/components/brand/Logo";
 import { InitialAvatar } from "@/app/components/brand/InitialAvatar";
@@ -20,6 +21,9 @@ export function GameScreen() {
   const { state, dispatch } = useGame();
   const watch = currentWatch(state);
   const [decision, setDecision] = useState<Decision | null>(null);
+
+  // Warm every upcoming card's image so they don't load-in mid-game.
+  usePreloadImages(state.deck);
 
   const decide = useCallback(
     (d: Decision) => {
