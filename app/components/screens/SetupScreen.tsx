@@ -35,7 +35,7 @@ const BUDGET_TIERS = [
     value: 5_000_000,
     name: "Whale",
     display: "$5M",
-    blurb: "buy the whole vault",
+    blurb: "taste, not budget",
   },
   {
     value: 25_000,
