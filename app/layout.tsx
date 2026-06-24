@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { CurtainIntro } from "@/app/components/brand/CurtainIntro";
+import { CashOutLoader } from "@/app/components/brand/CashOutLoader";
 
 // Brand typeface: MADE CARVING (per WATCH.FUN brand guidelines), licensed.
 // Body uses Light (300); titles, small text and buttons use Regular (400).
@@ -85,7 +87,11 @@ export default function RootLayout({
       lang="en"
       className={cn("h-full antialiased font-sans", madeCarving.variable)}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <CurtainIntro />
+        <CashOutLoader />
+      </body>
     </html>
   );
 }

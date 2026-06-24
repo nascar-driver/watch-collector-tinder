@@ -11,6 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { TiltCard } from "@/app/components/game/TiltCard";
+import { playCurtain } from "@/app/components/brand/CurtainIntro";
 import { DownloadCardModal } from "@/app/components/game/DownloadCardModal";
 
 export function EndScreen() {
@@ -118,7 +119,10 @@ export function EndScreen() {
 
         <div className="mt-10 flex w-full max-w-md flex-col gap-4 sm:mx-auto sm:flex-row">
           <Button
-            onClick={() => dispatch({ type: "RESET" })}
+            onClick={() => {
+              playCurtain();
+              dispatch({ type: "RESET" });
+            }}
             className="h-12 flex-1 text-base"
           >
             Play Again

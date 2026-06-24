@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useGame } from "@/app/state/GameProvider";
 import { currentWatch, remaining } from "@/app/lib/game";
 import { usePreloadImages } from "@/app/lib/usePreloadImages";
+import { playCashOutLoading } from "@/app/components/brand/CashOutLoader";
 import { formatHandle } from "@/app/lib/format";
 import { Logo } from "@/app/components/brand/Logo";
 import { InitialAvatar } from "@/app/components/brand/InitialAvatar";
@@ -32,6 +33,12 @@ export function GameScreen() {
     },
     [decision, state.phase, watch],
   );
+
+  // Cash out shows the loading veil, then resolves to the end screen.
+  const cashOut = useCallback(() => {
+    playCashOutLoading();
+    dispatch({ type: "CASH_OUT" });
+  }, [dispatch]);
 
   // After the reveal delay, commit the decision to the reducer and advance.
   useEffect(() => {
@@ -100,7 +107,7 @@ export function GameScreen() {
             spent={state.spent}
             collected={state.collected}
             streak={state.streak}
-            onCashOut={() => dispatch({ type: "CASH_OUT" })}
+            onCashOut={cashOut}
             disabled={busy}
           />
         </div>
@@ -123,7 +130,7 @@ export function GameScreen() {
           <CollectionRail
             collected={state.collected}
             value={state.spent}
-            onCashOut={() => dispatch({ type: "CASH_OUT" })}
+            onCashOut={cashOut}
             disabled={busy}
           />
         </div>
