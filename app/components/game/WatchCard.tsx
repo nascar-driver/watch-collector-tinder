@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import {
   motion,
   useMotionValue,
+  useMotionTemplate,
   useTransform,
   useSpring,
   animate,
@@ -43,6 +44,14 @@ export function WatchCard({
   const tiltY = useSpring(0, { stiffness: 150, damping: 15 });
   const MAX_TILT = 12;
 
+  // Specular glare — a soft highlight that reflects off the card surface.
+  // Its position moves opposite the pointer (as a fixed light would) and it
+  // brightens as the card tilts further, so light appears to catch the surface.
+  const glareX = useSpring(50, { stiffness: 150, damping: 18 });
+  const glareY = useSpring(50, { stiffness: 150, damping: 18 });
+  const glareOpacity = useSpring(0, { stiffness: 120, damping: 20 });
+  const glare = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.08) 32%, rgba(255,255,255,0) 70%)`;
+
   const handleTilt = (e: React.MouseEvent<HTMLDivElement>) => {
     if (disabled) return;
     const rect = e.currentTarget.getBoundingClientRect();
@@ -50,11 +59,18 @@ export function WatchCard({
     const py = (e.clientY - rect.top) / rect.height - 0.5;
     tiltY.set(px * MAX_TILT);
     tiltX.set(-py * MAX_TILT);
+    // Reflect the highlight opposite the cursor; intensity tracks tilt distance.
+    glareX.set((0.5 - px) * 100);
+    glareY.set((0.5 - py) * 100);
+    glareOpacity.set(0.18 + Math.min(0.27, Math.hypot(px, py) * 0.55));
   };
 
   const resetTilt = () => {
     tiltX.set(0);
     tiltY.set(0);
+    glareX.set(50);
+    glareY.set(50);
+    glareOpacity.set(0);
   };
 
   // When a decision is committed, fly the card off in that direction.
@@ -109,6 +125,12 @@ export function WatchCard({
       <motion.div
         className="pointer-events-none absolute inset-0 z-10 bg-bust/15"
         style={{ opacity: revealed ? (decided === "PASS" ? 1 : 0) : passTint }}
+      />
+
+      {/* specular glare — reflects off the surface as the card tilts */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 z-30 mix-blend-screen"
+        style={{ background: glare, opacity: glareOpacity }}
       />
 
       {/* watch.fun logomark */}
