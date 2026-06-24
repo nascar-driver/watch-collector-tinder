@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { WatchImage } from "@/app/components/game/WatchImage";
+import { TiltCard } from "@/app/components/game/TiltCard";
 import { DownloadCardModal } from "@/app/components/game/DownloadCardModal";
 
 export function EndScreen() {
@@ -72,25 +72,44 @@ export function EndScreen() {
             <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
               {state.collected.map((w) => (
                 <li key={w.id}>
-                  <Card size="sm" className="h-full">
-                    <CardContent className="flex flex-col gap-1">
-                      <div className="mb-2 flex h-24 items-center justify-center">
-                        <WatchImage watch={w} />
-                      </div>
-                      <span className="text-[10px] uppercase tracking-[0.18em] text-primary/70">
-                        {w.brand}
-                      </span>
-                      <span className="truncate text-sm text-foreground/90">
-                        {w.model}
-                      </span>
-                      <Badge
-                        variant="outline"
-                        className="mt-1 w-fit tabular-nums text-primary"
-                      >
-                        {formatMoney(w.price)}
-                      </Badge>
-                    </CardContent>
-                  </Card>
+                  <TiltCard className="h-full">
+                    <Card size="sm" className="h-full">
+                      <CardContent className="flex flex-col gap-3">
+                        {/* display stage — the watch is constrained directly
+                            with an explicit max height/width so it sits
+                            centered inside the frame with margin all around. */}
+                        <div
+                          className="flex h-36 items-center justify-center rounded-lg ring-1 ring-white/5"
+                          style={{
+                            background:
+                              "radial-gradient(circle at 50% 35%, rgba(40,26,36,0.9), rgba(8,5,9,0.95))",
+                          }}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={w.image}
+                            alt={`${w.brand} ${w.model}`}
+                            className="max-h-24 max-w-[80%] object-contain drop-shadow-[0_10px_24px_rgba(0,0,0,0.6)]"
+                          />
+                        </div>
+                        {/* info footer — separated from the stage */}
+                        <div className="flex flex-col gap-1 border-t border-line pt-3">
+                          <span className="text-[10px] uppercase tracking-[0.18em] text-primary/70">
+                            {w.brand}
+                          </span>
+                          <span className="truncate text-sm text-foreground/90">
+                            {w.model}
+                          </span>
+                          <Badge
+                            variant="outline"
+                            className="mt-1 w-fit tabular-nums text-primary"
+                          >
+                            {formatMoney(w.price)}
+                          </Badge>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TiltCard>
                 </li>
               ))}
             </ul>
