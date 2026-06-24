@@ -7,14 +7,17 @@ import { useGame } from "@/app/state/GameProvider";
 import { watches } from "@/app/data/watches";
 import { usePreloadImages } from "@/app/lib/usePreloadImages";
 import { Logo } from "@/app/components/brand/Logo";
-import { formatMoney } from "@/app/lib/format";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { AnimatedMoney } from "@/app/components/game/AnimatedNumber";
 
-/** Headline budget tiers, picked as cards (like preset chips). */
+/**
+ * Budget presets, picked as cards. Rendered in a 3-column grid, so the first
+ * three form the top row and the last three the bottom row. Each row reads
+ * left-to-right low → high, which the strength dots track.
+ */
 const BUDGET_TIERS = [
   {
     value: 500_000,
@@ -29,18 +32,30 @@ const BUDGET_TIERS = [
     blurb: "a serious cellar",
   },
   {
-    value: 10_000_000,
+    value: 5_000_000,
     name: "Whale",
-    display: "$10M",
+    display: "$5M",
     blurb: "buy the whole vault",
   },
+  {
+    value: 25_000,
+    name: "Brokie",
+    display: "$25K",
+    blurb: "ramen budget",
+  },
+  {
+    value: 50_000,
+    name: "Hobbyist",
+    display: "$50K",
+    blurb: "a tasteful start",
+  },
+  {
+    value: 100_000,
+    name: "Enthusiast",
+    display: "$100K",
+    blurb: "a few solid picks",
+  },
 ] as const;
-
-/** Smaller preset budget options, two rows of selectable chips. */
-const BUDGET_OPTIONS = [
-  [25_000, 50_000, 100_000],
-  [1_000, 5_000, 10_000],
-];
 
 export function SetupScreen() {
   const { state, dispatch } = useGame();
@@ -160,7 +175,7 @@ export function SetupScreen() {
                               key={d}
                               className={cn(
                                 "size-1.5 rounded-full",
-                                d <= i
+                                d <= i % 3
                                   ? "bg-primary"
                                   : "bg-muted-foreground/30",
                               )}
@@ -195,35 +210,6 @@ export function SetupScreen() {
                     <RotateCcw className="size-4" />
                   </button>
                 </div>
-
-                {BUDGET_OPTIONS.map((row, r) => (
-                  <div key={`row-${r}`} className="grid grid-cols-3 gap-2">
-                    {row.map((option) => {
-                      const selected = budget === option;
-                      return (
-                        <button
-                          key={option}
-                          type="button"
-                          aria-pressed={selected}
-                          onClick={() => setBudget(option)}
-                          className={cn(
-                            "relative flex items-center justify-center rounded-2xl border px-2 py-2.5 text-sm tabular-nums transition-colors",
-                            selected
-                              ? "border-primary bg-[rgb(248_239_211_/_8%)] text-foreground"
-                              : "border-[rgb(248_239_211_/_12%)] text-muted-foreground hover:bg-[rgb(248_239_211_/_8%)]",
-                          )}
-                        >
-                          {selected && (
-                            <span className="absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                              <Check className="size-3" />
-                            </span>
-                          )}
-                          {formatMoney(option)}
-                        </button>
-                      );
-                    })}
-                  </div>
-                ))}
               </Field>
 
               <Button
