@@ -5,7 +5,7 @@
     "model": "F-91W",
     "price": 20,
     "image": "/watches/casio-f91w.png",
-    "history": "Introduced in 1989 and barely changed since, the F-91W bundled a stopwatch, alarm and micro-light into a featherweight resin case. With well over 100 million sold, it is the best-selling watch ever made."
+    "history": "Introduced in 1989 and barely changed since, the F-91W bundled a stopwatch, alarm and micro-light into a featherweight resin case. With well over 100 million sold, it is one the best-selling watch ever made."
   },
   {
     "id": "seiko-5-sports-srpd63k",
@@ -13,7 +13,7 @@
     "model": "SEIKO 5 SPORTS AUTOMATIC SRPD63K",
     "price": 250,
     "image": "/watches/seiko-5-sports-srpd63k.png",
-    "history": "The Seiko 5 traces to 1963's Sportsmatic 5, the first Japanese automatic day-date. The tougher Sports line arrived in 1968, and this modern SRPD generation relaunched the icon as an affordable mechanical workhorse."
+    "history": "The Seiko 5 traces to 1963's Sportsmatic 5, one of the first Japanese automatic day-date. The tougher Sports line arrived in 1968, and this modern SRPD generation relaunched the icon as an affordable mechanical workhorse."
   },
   {
     "id": "swatch-moonswatch-moon-so33m100",
@@ -46,7 +46,7 @@
     "model": "Aluminium",
     "price": 3300,
     "image": "/watches/bulgari-aluminium.png",
-    "history": "First shown in 1998, the Aluminium paired a lightweight aluminium case with rubber and the BVLGARI•BVLGARI bezel — a modernist statement that even adorned an Alitalia jumbo jet. It returned in 2020 with a mechanical movement."
+    "history": "First shown in 1998, the Aluminium paired a lightweight aluminium case with rubber and the BVLGARI•BVLGARI bezel — a bold break from traditional luxury watchmaking. It returned in 2020 with a mechanical movement, reaffirming its place as a design-led icon."
   },
   {
     "id": "cartier-tank-must-steel-black",
@@ -78,7 +78,7 @@
     "model": "Speedmaster Moonwatch",
     "price": 6000,
     "image": "/watches/omega-speedmaster-moonwatch.png",
-    "history": "Qualified by NASA for spaceflight in 1965, the Speedmaster was on Buzz Aldrin's wrist on the lunar surface during Apollo 11 in 1969 — the first watch worn on the Moon, and forever 'the Moonwatch.'"
+    "history": "Qualified by NASA for spaceflight in 1965, the Speedmaster was on Buzz Aldrin's wrist on the lunar surface during Apollo 11 in 1969 — the first watch worn on the Moon (by Buzz Aldrin), and forever 'the Moonwatch.'"
   },
   {
     "id": "cartier-santos-large",
@@ -86,7 +86,7 @@
     "model": "Santos de Cartier Large",
     "price": 8800,
     "image": "/watches/cartier-santos-large.png",
-    "history": "Created by Louis Cartier in 1904 for aviator Alberto Santos-Dumont, who wanted to read the time without letting go of the controls, the Santos is among the very first purpose-built wristwatches — and the first pilot's watch."
+    "history": "Created by Louis Cartier in 1904 for aviator Alberto Santos-Dumont, who wanted to read the time without letting go of the controls, the Santos is among the very first purpose-built wristwatches — and widely regarded as one of the first pilot’s watches."
   },
   {
     "id": "iwc-portugieser-chronograph-steel-blue",
@@ -126,7 +126,7 @@
     "model": "Submariner Date",
     "price": 33000,
     "image": "/watches/rolex-submariner-date-yellow-gold.png",
-    "history": "Introduced in 1953 as the first dive watch waterproof to 100 metres, the Submariner's rotating timing bezel and luminous dial set the template that every diver since has followed."
+    "history": "Introduced in 1953 as one among the first dive watch waterproof to 100 metres, the Submariner's rotating timing bezel and luminous dial set the template that every diver since has followed."
   },
   {
     "id": "vacheron-constantin-overseas",
@@ -206,6 +206,6 @@
     "model": "Celestial Platinum",
     "price": 4116667,
     "image": "/watches/patek-philippe-celestial-platinum-emerald-blue.png",
-    "history": "Patek's celestial sky-chart complication descends from astronomical pieces the maison built in the 1920s. It reached the wrist around the millennium, its rotating star map tracing the night sky as seen over Geneva."
+    "history": "Patek's celestial sky-chart complication descends from astronomical pieces the maison built in the 1920s. It introduced as a wristwatch in the early 2000s, its rotating star map tracing the night sky as seen over Geneva."
   }
 ]

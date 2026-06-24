@@ -93,7 +93,7 @@ function SectionLabel({ children }: { children: string }) {
 /** Cumulative-value line/area chart — the collection growing over the run. */
 function GrowthGraph({ collected, lost }: { collected: Watch[]; lost: boolean }) {
   const W = INNER_W;
-  const H = 240;
+  const H = 200;
 
   if (collected.length === 0) {
     return (
@@ -169,6 +169,121 @@ export const CollectionCard = forwardRef<HTMLDivElement, CollectionCardProps>(
     const h = formatHandle(handle);
     const displayName = name.trim() || "A collector";
     const top3 = [...collected].sort((a, b) => b.price - a.price).slice(0, 3);
+    // Arrange as a podium: rank 1 (priciest) centered, rank 2 left, rank 3
+    // right — i.e. [2][1][3]. With fewer watches we drop the missing slots
+    // (1 → middle only, 2 → left + middle).
+    const [r1, r2, r3] = top3;
+    const hasPodium = collected.length > 0;
+
+    // Per-rank sizing: the winner (1) is wider, taller and lifted highest; the
+    // runners-up (2 & 3) share the same size and lift so they sit level.
+    const RANK = {
+      1: { cardW: 280, imgH: 124, lift: 26, border: "rgba(216,185,135,0.45)" },
+      2: { cardW: 224, imgH: 104, lift: 10, border: "rgba(216,185,135,0.16)" },
+      3: { cardW: 224, imgH: 104, lift: 10, border: "rgba(216,185,135,0.16)" },
+    } as const;
+    const BADGE = {
+      1: { bg: GOLD, color: "#1a1016" },
+      2: { bg: "rgba(216,185,135,0.28)", color: CREAM },
+      3: { bg: "rgba(216,185,135,0.20)", color: CREAM },
+    } as const;
+
+    // One podium card. Rendered into fixed left/middle/right slots so rank 1
+    // always stays centered regardless of how many watches there are.
+    const podiumCard = (w: Watch, rank: 1 | 2 | 3) => {
+      const cfg = RANK[rank];
+      const badge = BADGE[rank];
+      return (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: cfg.cardW,
+            marginBottom: cfg.lift,
+            padding: 16,
+            boxSizing: "border-box",
+            borderRadius: 22,
+            backgroundColor: "rgba(8, 5, 10, 0.55)",
+            border: `1px solid ${cfg.border}`,
+            gap: 10,
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 34,
+              height: 34,
+              borderRadius: 17,
+              fontSize: 20,
+              backgroundColor: badge.bg,
+              color: badge.color,
+            }}
+          >
+            {rank}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              height: cfg.imgH + 24,
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 16,
+              border: "1px solid rgba(255,255,255,0.06)",
+              backgroundImage:
+                "radial-gradient(circle at 50% 35%, rgba(40,26,36,0.9), rgba(8,5,9,0.95))",
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={w.image}
+              alt={w.model}
+              style={{ maxWidth: "82%", maxHeight: cfg.imgH, objectFit: "contain" }}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 3,
+              width: "100%",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                fontSize: 15,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                color: GOLD_DEEP,
+              }}
+            >
+              {w.brand}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                maxWidth: "100%",
+                fontSize: 18,
+                color: CREAM,
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {w.model}
+            </div>
+            <div style={{ display: "flex", marginTop: 2, fontSize: 20, color: GOLD }}>
+              {formatMoney(w.price)}
+            </div>
+          </div>
+        </div>
+      );
+    };
 
     return (
       <div
@@ -256,71 +371,35 @@ export const CollectionCard = forwardRef<HTMLDivElement, CollectionCardProps>(
           />
         </div>
 
-        {/* Top 3 watches */}
-        <div style={{ display: "flex", flexDirection: "column", marginTop: 32, gap: 14 }}>
-          <SectionLabel>Top Watches</SectionLabel>
-          <div style={{ display: "flex", gap: 22 }}>
-            {top3.map((w, i) => (
-              <div
-                key={`${w.id}-${i}`}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: (INNER_W - 22 * 2) / 3,
-                  height: 250,
-                  padding: 18,
-                  boxSizing: "border-box",
-                  borderRadius: 18,
-                  backgroundColor: "rgba(8, 5, 10, 0.55)",
-                  border: `1px solid rgba(216, 185, 135, 0.16)`,
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flex: 1,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    minHeight: 0,
-                  }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={w.image}
-                    alt={w.model}
-                    style={{
-                      maxWidth: "100%",
-                      maxHeight: 130,
-                      objectFit: "contain",
-                    }}
-                  />
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    fontSize: 18,
-                    color: CREAM,
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                  }}
-                >
-                  {w.brand} {w.model}
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    marginTop: 4,
-                    fontSize: 20,
-                    color: GOLD_DEEP,
-                  }}
-                >
-                  {formatMoney(w.price)}
-                </div>
-              </div>
-            ))}
+        {/* Top watches — podium [2][1][3], rank 1 always centered */}
+        {hasPodium && (
+          <div style={{ display: "flex", flexDirection: "column", marginTop: 26, gap: 12 }}>
+            <SectionLabel>Top Watches</SectionLabel>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "center",
+                gap: 20,
+              }}
+            >
+              {/* left slot (rank 2) — spacer keeps the middle centered */}
+              {r2 ? (
+                podiumCard(r2, 2)
+              ) : (
+                <div style={{ display: "flex", width: RANK[2].cardW }} />
+              )}
+              {/* middle slot (rank 1) */}
+              {r1 ? podiumCard(r1, 1) : null}
+              {/* right slot (rank 3) — spacer keeps the middle centered */}
+              {r3 ? (
+                podiumCard(r3, 3)
+              ) : (
+                <div style={{ display: "flex", width: RANK[3].cardW }} />
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Portfolio growth graph */}
         <div style={{ display: "flex", flexDirection: "column", marginTop: 28, gap: 14 }}>
