@@ -79,6 +79,7 @@ export function WatchCard({
         rotateX: tiltX,
         rotateY: tiltY,
         transformPerspective: 1000,
+        transformStyle: "preserve-3d",
         background: "var(--background-secondary)",
         backdropFilter: "blur(1.25rem)",
         WebkitBackdropFilter: "blur(1.25rem)",
@@ -129,9 +130,26 @@ export function WatchCard({
         PASS
       </motion.div>
 
-      {/* watch image */}
-      <div className="pointer-events-none flex min-h-0 flex-1 items-center justify-center p-3 pt-6">
-        <WatchImage watch={watch} />
+      {/* watch image — lifted off the card surface so it reads as floating */}
+      <div
+        className="pointer-events-none relative flex min-h-0 flex-1 items-center justify-center p-3 pt-6"
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        {/* soft contact shadow cast on the card surface; reacts to the bob */}
+        <motion.div
+          className="absolute bottom-5 left-1/2 -z-10 h-7 w-1/2 -translate-x-1/2 rounded-[50%] bg-black/55 blur-xl"
+          animate={{ scaleX: [1, 0.82, 1], opacity: [0.55, 0.32, 0.55] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        />
+        {/* the watch itself, pushed toward the viewer + a gentle vertical drift */}
+        <motion.div
+          className="relative flex h-full w-full items-center justify-center"
+          style={{ translateZ: 60 }}
+          animate={{ y: [0, -12, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <WatchImage watch={watch} />
+        </motion.div>
       </div>
 
       {/* info panel — a nested card sitting under the watch */}
