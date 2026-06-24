@@ -39,7 +39,9 @@ export function CashOutLoader() {
       {active && (
         <motion.div
           key="cashout-loader"
-          initial={{ opacity: 0 }}
+          // Appear instantly (no fade-in) so it covers the end screen the
+          // moment CASH_OUT flips the phase; only the exit fades out.
+          initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
