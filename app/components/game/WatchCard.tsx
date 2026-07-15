@@ -295,6 +295,29 @@ export function WatchCard({
         </div>
       </motion.div>
 
+      {/* mobile-only price reveal — sits behind the card so it's visible once
+          the card flies off. Buy/bust tint matches the swipe direction. */}
+      <AnimatePresence>
+        {revealed && (
+          <motion.div
+            key="mobile-price"
+            className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center lg:hidden"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 240, damping: 22 }}
+          >
+            <div
+              className={`text-6xl tabular-nums drop-shadow-[0_6px_24px_rgba(0,0,0,0.85)] ${
+                decided === "BUY" ? "text-buy" : "text-bust"
+              }`}
+            >
+              {formatMoney(watch.price)}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* history panel — floats above the icon, tilts in sync with the card */}
       <AnimatePresence>
         {infoOpen && !revealed && (

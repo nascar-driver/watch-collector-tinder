@@ -18,18 +18,16 @@ interface MobileStatBarProps {
   remaining: number;
   spent: number;
   collected: Watch[];
-  streak: number;
   onCashOut: () => void;
   disabled?: boolean;
 }
 
-/** Compact HUD for mobile: Remaining headline, budget/spent/streak, and a collection drawer. */
+/** Compact HUD for mobile: Remaining headline, budget/spent, and a collection drawer. */
 export function MobileStatBar({
   budget,
   remaining,
   spent,
   collected,
-  streak,
   onCashOut,
   disabled,
 }: MobileStatBarProps) {
@@ -79,10 +77,6 @@ export function MobileStatBar({
         <span>
           Spent{" "}
           <AnimatedMoney value={spent} className="text-foreground/80 tabular-nums" />
-        </span>
-        <span>
-          Streak{" "}
-          <AnimatedCount value={streak} className="text-foreground/80 tabular-nums" />
         </span>
       </div>
 
