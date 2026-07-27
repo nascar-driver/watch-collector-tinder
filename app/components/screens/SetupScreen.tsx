@@ -15,8 +15,9 @@ import { AnimatedMoney } from "@/app/components/game/AnimatedNumber";
 
 /**
  * Budget presets, picked as cards. Rendered in a 3-column grid, so the first
- * three form the top row and the last three the bottom row. Each row reads
- * left-to-right low → high, which the strength dots track.
+ * three form the top row and the last three the bottom row. Each card shows six
+ * strength dots filled by the tier's rank across all budgets — the cheapest
+ * budget fills one dot, the priciest fills all six.
  */
 const BUDGET_TIERS = [
   {
@@ -56,6 +57,15 @@ const BUDGET_TIERS = [
     blurb: "a few solid picks",
   },
 ] as const;
+
+// Ascending order of budgets, used to rank each tier's strength (1 = cheapest,
+// BUDGET_TIERS.length = priciest) so the dots read consistently regardless of
+// the grid layout above.
+const BUDGET_RANK = new Map(
+  [...BUDGET_TIERS]
+    .sort((a, b) => a.value - b.value)
+    .map((tier, index) => [tier.value, index + 1]),
+);
 
 export function SetupScreen() {
   const { state, dispatch } = useGame();
@@ -143,8 +153,9 @@ export function SetupScreen() {
                 <FieldLabel htmlFor="budget">Starting Budget</FieldLabel>
 
                 <div className="grid grid-cols-3 gap-2">
-                  {BUDGET_TIERS.map((tier, i) => {
+                  {BUDGET_TIERS.map((tier) => {
                     const selected = budget === tier.value;
+                    const rank = BUDGET_RANK.get(tier.value) ?? 0;
                     return (
                       <button
                         key={tier.value}
@@ -170,17 +181,19 @@ export function SetupScreen() {
                           {tier.display}
                         </span>
                         <span className="flex gap-1">
-                          {[0, 1, 2].map((d) => (
-                            <span
-                              key={d}
-                              className={cn(
-                                "size-1.5 rounded-full",
-                                d <= i % 3
-                                  ? "bg-primary"
-                                  : "bg-muted-foreground/30",
-                              )}
-                            />
-                          ))}
+                          {Array.from({ length: BUDGET_TIERS.length }).map(
+                            (_, d) => (
+                              <span
+                                key={d}
+                                className={cn(
+                                  "size-1.5 rounded-full",
+                                  d < rank
+                                    ? "bg-primary"
+                                    : "bg-muted-foreground/30",
+                                )}
+                              />
+                            ),
+                          )}
                         </span>
                         <span className="text-[11px] leading-tight text-muted-foreground italic">
                           {tier.blurb}
