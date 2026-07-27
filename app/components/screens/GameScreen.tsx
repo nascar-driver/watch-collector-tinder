@@ -109,8 +109,10 @@ export function GameScreen() {
           />
         </div>
 
-        {/* center: the swipe card (single instance, shared across breakpoints) */}
-        <div className="relative z-20 flex flex-1 items-center justify-center overflow-hidden">
+        {/* center: the swipe card (single instance, shared across breakpoints).
+            Mobile clips the fly-off so the page doesn't scroll sideways; desktop
+            lets the card overflow and ride on top of the side rails (z-20). */}
+        <div className="relative z-20 flex flex-1 items-center justify-center overflow-hidden lg:overflow-visible">
           {watch && (
             <WatchCard
               key={watch.id}

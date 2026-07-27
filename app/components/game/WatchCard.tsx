@@ -295,13 +295,14 @@ export function WatchCard({
         </div>
       </motion.div>
 
-      {/* mobile-only price reveal — sits behind the card so it's visible once
-          the card flies off. Buy/bust tint matches the swipe direction. */}
+      {/* price reveal — sits behind the card so it's visible once the card
+          flies off (both mobile and desktop). Buy/bust tint matches the swipe
+          direction. */}
       <AnimatePresence>
         {revealed && (
           <motion.div
-            key="mobile-price"
-            className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center lg:hidden"
+            key="price-reveal"
+            className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
