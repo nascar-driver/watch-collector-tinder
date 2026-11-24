@@ -63,7 +63,7 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
           type="button"
           aria-label="Close"
           onClick={onClose}
-          className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-[rgba(248,239,211,0.15)] text-[#e8dccb] transition-[background-color,transform] duration-200 ease-[ease] hover:bg-[rgba(248,239,211,0.25)] hover:[transform:scale(1.05)]"
+          className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-[rgba(229,227,232,0.15)] text-[#e5e3e8] transition-[background-color,transform] duration-200 ease-[ease] hover:bg-[rgba(229,227,232,0.25)] hover:[transform:scale(1.05)]"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="square" />
@@ -72,7 +72,7 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
         </button>
 
         <div className="px-12 text-center">
-          <h2 id="contact-modal-title" className="text-[28px] text-cream">
+          <h2 id="contact-modal-title" className="text-[28px] text-foreground">
             Contact us
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">

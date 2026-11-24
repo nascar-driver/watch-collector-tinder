@@ -19,7 +19,7 @@ export function InitialAvatar({
     <span
       aria-hidden
       className={cn(
-        "inline-flex shrink-0 items-center justify-center rounded-full border border-[rgb(248_239_211_/_12%)] font-medium uppercase leading-none",
+        "inline-flex shrink-0 items-center justify-center rounded-full border border-[rgb(229_227_232_/_12%)] font-medium uppercase leading-none",
         className,
       )}
       style={{

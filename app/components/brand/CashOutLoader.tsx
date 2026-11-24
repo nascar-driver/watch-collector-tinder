@@ -71,7 +71,7 @@ export function CashOutLoader() {
               fontSize: 14,
               letterSpacing: "0.28em",
               textTransform: "uppercase",
-              color: "rgba(245, 236, 217, 0.55)",
+              color: "rgba(229, 227, 232, 0.55)",
             }}
           >
             Cashing out…

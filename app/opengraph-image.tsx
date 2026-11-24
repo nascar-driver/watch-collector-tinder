@@ -2,20 +2,22 @@ import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-// Branded social-share card (Open Graph + Twitter). Built on the finished
-// brand artwork (og-base.png: eye logomark + "watch.fun" wordmark over the
-// purple/gold ambiance) with the "Watch Collector Tinder" tagline overlaid.
-// Next.js auto-wires the <meta> tags; twitter-image.tsx re-exports this.
+// Branded social-share card (Open Graph + Twitter), styled like watch.fun.collect's
+// og.jpg: rays logomark + "watch.fun" wordmark over the charcoal/purple gradient,
+// with the "Watch Collector Tinder" tagline. Next.js auto-wires og:image and
+// mirrors it to twitter:image. The URL carries a hash of this file's source, so
+// editing it gives Telegram/X a fresh URL; changing only icon.svg or the font
+// does not, so bump this marker when you do.  og-version: 2
 export const alt = "watch.fun — Watch Collector Tinder";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OpengraphImage() {
-  const [bg, bold] = await Promise.all([
-    readFile(join(process.cwd(), "app/og-base.png")),
+  const [icon, bold] = await Promise.all([
+    readFile(join(process.cwd(), "app/icon.svg")),
     readFile(join(process.cwd(), "app/fonts/MADECARVING-Bold.otf")),
   ]);
-  const bgDataUri = `data:image/png;base64,${bg.toString("base64")}`;
+  const iconDataUri = `data:image/svg+xml;base64,${icon.toString("base64")}`;
 
   return new ImageResponse(
     (
@@ -24,53 +26,39 @@ export default async function OpengraphImage() {
           width: "100%",
           height: "100%",
           display: "flex",
-          position: "relative",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
           fontFamily: "MADE CARVING",
+          backgroundImage:
+            "radial-gradient(60% 70% at 85% 100%, rgba(112, 50, 207, 0.45), transparent 70%), linear-gradient(148deg, #000000, #242029)",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={bgDataUri}
-          width={size.width}
-          height={size.height}
-          alt=""
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
+        <img src={iconDataUri} width={180} height={180} alt="" />
         <div
           style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
             display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            paddingBottom: 56,
+            marginTop: 36,
+            fontSize: 112,
+            fontWeight: 700,
+            lineHeight: 1,
+            color: "#EEE8DE",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              fontSize: 60,
-              fontWeight: 700,
-              letterSpacing: "0.04em",
-              // Match the .text-gold-gradient brand style used for "Collector
-              // Tinder" on the setup screen (globals.css).
-              backgroundImage: "linear-gradient(135deg, #ebcc99, #a7855b)",
-              backgroundClip: "text",
-              color: "transparent",
-            }}
-          >
-            Watch Collector Tinder
-          </div>
+          watch<span style={{ color: "#9D5CFF" }}>.</span>fun
+        </div>
+        <div
+          style={{
+            display: "flex",
+            marginTop: 28,
+            fontSize: 40,
+            fontWeight: 700,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            color: "#C198FF",
+          }}
+        >
+          Watch Collector Tinder
         </div>
       </div>
     ),

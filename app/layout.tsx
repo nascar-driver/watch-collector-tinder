@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -73,8 +73,14 @@ export const metadata: Metadata = {
     creator: "@watchdotfun",
     title: TITLE,
     description: DESCRIPTION,
-    // twitter:image is auto-generated from app/twitter-image.tsx
+    // twitter:image mirrors og:image (app/opengraph-image.tsx)
   },
+  // icons come from app/icon.svg + app/favicon.ico (watch.fun.collect's mark)
+};
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({

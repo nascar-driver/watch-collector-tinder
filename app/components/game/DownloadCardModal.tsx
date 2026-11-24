@@ -96,7 +96,7 @@ export function DownloadCardModal({
         <Button
           variant="default"
           // Same shape as "Play Again", but the Streak-card background and a
-          // simple dim on hover (kill btn-primary's gold glow with `!`).
+          // simple dim on hover (kill btn-primary's glow with `!`).
           className={cn(triggerClassName, "hover:opacity-80 hover:!shadow-none")}
           style={{
             background: "var(--background-secondary)",
@@ -108,7 +108,7 @@ export function DownloadCardModal({
       </DialogTrigger>
       <DialogContent className="max-w-xl bg-background">
         <DialogHeader>
-          <DialogTitle className="text-gold-gradient text-2xl uppercase">
+          <DialogTitle className="text-brand-gradient text-2xl uppercase">
             Your Collection Card
           </DialogTitle>
           <DialogDescription>

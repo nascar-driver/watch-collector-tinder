@@ -225,7 +225,7 @@ export function WatchCard({
             }}
             aria-label="Watch history"
             aria-expanded={infoOpen}
-            className="absolute top-4 right-4 z-40 grid size-10 place-items-center rounded-full bg-[rgba(8,5,9,0.55)] text-gold backdrop-blur transition-colors hover:bg-[rgba(8,5,9,0.85)]"
+            className="absolute top-4 right-4 z-40 grid size-10 place-items-center rounded-full bg-[rgba(8,5,9,0.55)] text-highlight backdrop-blur transition-colors hover:bg-[rgba(8,5,9,0.85)]"
           >
             <Info className="size-5" />
           </button>
@@ -272,10 +272,10 @@ export function WatchCard({
           className="pointer-events-none shrink-0 rounded-[20px] px-5 py-4 ring-1 ring-white/5"
           style={{ background: "rgba(8, 5, 9, 0.55)" }}
         >
-          <div className="text-xs uppercase tracking-[0.22em] text-gold">
+          <div className="text-xs uppercase tracking-[0.22em] text-highlight">
             {watch.brand}
           </div>
-          <div className="mt-1 text-2xl leading-tight text-cream">
+          <div className="mt-1 text-2xl leading-tight text-foreground">
             {watch.model}
           </div>
           <div className="mt-3 text-3xl">
@@ -285,7 +285,7 @@ export function WatchCard({
               </span>
             ) : (
               <span
-                className="tracking-[0.4em] text-cream/35"
+                className="tracking-[0.4em] text-foreground/35"
                 aria-label="price hidden"
               >
                 ? ? ?
@@ -329,7 +329,7 @@ export function WatchCard({
             onPointerLeave={(e) => {
               if (e.pointerType === "mouse") scheduleClose();
             }}
-            className="absolute right-2 bottom-full z-40 mb-3 flex h-[34%] w-[62%] origin-bottom-right flex-col overflow-hidden rounded-2xl border border-[rgb(248_239_211_/_22%)] p-4 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)] lg:right-auto lg:bottom-auto lg:left-full lg:top-[33%] lg:mb-0 lg:ml-3 lg:w-56 lg:origin-left"
+            className="absolute right-2 bottom-full z-40 mb-3 flex h-[34%] w-[62%] origin-bottom-right flex-col overflow-hidden rounded-2xl border border-[rgb(229_227_232_/_22%)] p-4 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)] lg:right-auto lg:bottom-auto lg:left-full lg:top-[33%] lg:mb-0 lg:ml-3 lg:w-56 lg:origin-left"
             style={{
               // Follow the card's swipe (translate + rotate) and tilt together.
               x,
@@ -346,12 +346,12 @@ export function WatchCard({
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 280, damping: 26 }}
           >
-            <div className="mb-1.5 shrink-0 text-[10px] uppercase tracking-[0.22em] text-gold">
+            <div className="mb-1.5 shrink-0 text-[10px] uppercase tracking-[0.22em] text-highlight">
               History
             </div>
             <div className="min-h-0 flex-1">
               <AutoScrollText>
-                <p className="text-[11px] leading-relaxed text-cream/75">
+                <p className="text-[11px] leading-relaxed text-foreground/75">
                   {watch.history}
                 </p>
               </AutoScrollText>

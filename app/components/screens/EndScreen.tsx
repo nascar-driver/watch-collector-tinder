@@ -39,7 +39,7 @@ export function EndScreen() {
         <h1
           className={cn(
             "text-center text-4xl uppercase leading-none sm:text-6xl",
-            lost ? "text-bust" : "text-gold-gradient",
+            lost ? "text-bust" : "text-brand-gradient",
           )}
         >
           {lost ? "Collection Ruined" : "Collection Complete"}
@@ -193,7 +193,7 @@ function WatchStack({ watches }: { watches: Watch[] }) {
                   className="flex h-36 items-center justify-center rounded-lg ring-1 ring-white/5"
                   style={{
                     background:
-                      "radial-gradient(circle at 50% 35%, rgba(40,26,36,0.9), rgba(8,5,9,0.95))",
+                      "radial-gradient(circle at 50% 35%, rgba(36,32,41,0.9), rgba(8,5,9,0.95))",
                   }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -245,7 +245,7 @@ function Summary({
       <div
         className={cn(
           "mt-1 text-4xl tabular-nums",
-          accent ? "text-gold-gradient" : "text-foreground/90",
+          accent ? "text-brand-gradient" : "text-foreground/90",
         )}
       >
         {value}

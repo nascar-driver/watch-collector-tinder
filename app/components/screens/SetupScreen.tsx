@@ -95,7 +95,7 @@ export function SetupScreen() {
     <div className="flex flex-1 flex-col items-center justify-center p-4 sm:p-8">
       <div className="mb-8 flex flex-col items-center text-center">
         <Logo size={56} />
-        <h1 className="text-gold-gradient mt-6 text-4xl uppercase leading-none sm:text-5xl">
+        <h1 className="text-brand-gradient mt-6 text-4xl uppercase leading-none sm:text-5xl">
           Collector
           <br />
           Tinder
@@ -165,8 +165,8 @@ export function SetupScreen() {
                         className={cn(
                           "relative flex flex-col items-center gap-1.5 rounded-2xl border px-2 py-3 text-center transition-colors",
                           selected
-                            ? "border-primary bg-[rgb(248_239_211_/_8%)]"
-                            : "border-[rgb(248_239_211_/_12%)] hover:bg-[rgb(248_239_211_/_5%)]",
+                            ? "border-primary bg-[rgb(229_227_232_/_8%)]"
+                            : "border-[rgb(229_227_232_/_12%)] hover:bg-[rgb(229_227_232_/_5%)]",
                         )}
                       >
                         {selected && (
@@ -177,7 +177,7 @@ export function SetupScreen() {
                         <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                           {tier.name}
                         </span>
-                        <span className="text-gold-gradient text-xl leading-none">
+                        <span className="text-brand-gradient text-xl leading-none">
                           {tier.display}
                         </span>
                         <span className="flex gap-1">
@@ -207,18 +207,18 @@ export function SetupScreen() {
                 <div
                   id="budget"
                   aria-live="polite"
-                  className="relative flex h-14 items-center justify-center rounded-2xl border border-[rgb(248_239_211_/_12%)] bg-[rgb(248_239_211_/_4%)]"
+                  className="relative flex h-14 items-center justify-center rounded-2xl border border-[rgb(229_227_232_/_12%)] bg-[rgb(229_227_232_/_4%)]"
                 >
                   <AnimatedMoney
                     value={budget}
-                    className="text-gold-gradient text-3xl leading-none tabular-nums"
+                    className="text-brand-gradient text-3xl leading-none tabular-nums"
                   />
                   <button
                     type="button"
                     onClick={() => setBudget(0)}
                     disabled={budget <= 0}
                     aria-label="Reset budget"
-                    className="absolute right-3 flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-[rgb(248_239_211_/_8%)] hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
+                    className="absolute right-3 flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-[rgb(229_227_232_/_8%)] hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
                   >
                     <RotateCcw className="size-4" />
                   </button>

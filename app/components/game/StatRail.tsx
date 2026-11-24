@@ -51,7 +51,7 @@ export function StatRail({ budget, remaining, spent }: StatRailProps) {
       className="w-[360px] rounded-[1.75rem] p-6"
       style={{
         background: "var(--background-secondary)",
-        border: ".0625rem solid rgba(216, 185, 135, 0.28)",
+        border: ".0625rem solid rgba(157, 92, 255, 0.28)",
         backdropFilter: "blur(1.25rem)",
         WebkitBackdropFilter: "blur(1.25rem)",
       }}
@@ -60,19 +60,19 @@ export function StatRail({ budget, remaining, spent }: StatRailProps) {
       <div className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
         Remaining
       </div>
-      <motion.div className="text-gold-gradient mt-1 text-[2.75rem] leading-none tabular-nums">
+      <motion.div className="text-brand-gradient mt-1 text-[2.75rem] leading-none tabular-nums">
         {remainingText}
       </motion.div>
 
       {/* Liquid vs spent bar */}
-      <div className="mt-5 h-2 w-full overflow-hidden rounded-full bg-[rgb(248_239_211_/_8%)]">
+      <div className="mt-5 h-2 w-full overflow-hidden rounded-full bg-[rgb(229_227_232_/_8%)]">
         <motion.div
           className="h-full rounded-full"
           style={{
             width: barWidth,
             background:
-              "linear-gradient(90deg, #a7855b, #d8b987 55%, #ebcc99)",
-            boxShadow: "0 0 8px rgba(235, 204, 153, 0.45)",
+              "linear-gradient(90deg, #7032cf, #9d5cff 55%, #c198ff)",
+            boxShadow: "0 0 8px rgba(157, 92, 255, 0.45)",
           }}
         />
       </div>
@@ -81,7 +81,7 @@ export function StatRail({ budget, remaining, spent }: StatRailProps) {
         <motion.span className="tabular-nums">{spentLabel}</motion.span>
       </div>
 
-      <div className="my-6 border-t border-[rgb(248_239_211_/_10%)]" />
+      <div className="my-6 border-t border-[rgb(229_227_232_/_10%)]" />
 
       {/* Budget / Spent footer */}
       <div className="grid grid-cols-2">
@@ -89,18 +89,18 @@ export function StatRail({ budget, remaining, spent }: StatRailProps) {
           <div className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
             Budget
           </div>
-          <div className="text-gold-gradient mt-1 text-xl tabular-nums">
+          <div className="text-brand-gradient mt-1 text-xl tabular-nums">
             {formatMoney(budget)}
           </div>
           <div className="mt-0.5 text-xs lowercase text-muted-foreground">
             ceiling
           </div>
         </div>
-        <div className="border-l border-[rgb(248_239_211_/_10%)] pl-5">
+        <div className="border-l border-[rgb(229_227_232_/_10%)] pl-5">
           <div className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
             Spent
           </div>
-          <motion.div className="text-gold-gradient mt-1 text-xl tabular-nums">
+          <motion.div className="text-brand-gradient mt-1 text-xl tabular-nums">
             {spentText}
           </motion.div>
           <div className="mt-0.5 flex items-center gap-1 text-xs lowercase text-buy">

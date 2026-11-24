@@ -76,7 +76,7 @@ export function LegalModal({ title, html, onClose }: LegalModalProps) {
 
         <h2
           id="legal-modal-title"
-          className="shrink-0 px-12 text-center text-[28px] text-cream"
+          className="shrink-0 px-12 text-center text-[28px] text-foreground"
         >
           {title}
         </h2>

@@ -30,7 +30,7 @@ export function CollectionRail({
       className="h-full ring-0"
       style={{
         background: "var(--background-secondary)",
-        border: ".0625rem solid rgba(216, 185, 135, 0.28)",
+        border: ".0625rem solid rgba(157, 92, 255, 0.28)",
         backdropFilter: "blur(1.25rem)",
         WebkitBackdropFilter: "blur(1.25rem)",
         borderRadius: "1.75rem",
@@ -58,7 +58,7 @@ export function CollectionRail({
           </div>
           <AnimatedMoney
             value={value}
-            className="text-gold-gradient text-3xl tabular-nums"
+            className="text-brand-gradient text-3xl tabular-nums"
           />
         </div>
         <Button

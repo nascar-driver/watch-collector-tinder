@@ -19,12 +19,12 @@ interface CollectionCardProps {
 
 // Brand tokens (mirrors globals.css). Solid colors only — gradient text via
 // background-clip is unreliable when rasterized by html-to-image.
-const GOLD = "#e9cd9a";
-const GOLD_DEEP = "#c9a96e";
+const ACCENT = "#c198ff";
+const ACCENT_DEEP = "#9d5cff";
 const BUST = "#e5484d";
-const CREAM = "#f5ecd9";
-const MUTED = "rgba(245, 236, 217, 0.55)";
-const HAIRLINE = "rgba(216, 185, 135, 0.22)";
+const TEXT = "#e5e3e8";
+const MUTED = "rgba(229, 227, 232, 0.55)";
+const HAIRLINE = "rgba(157, 92, 255, 0.22)";
 
 function fmtSigned(n: number): string {
   return n < 0 ? `-${formatMoney(-n)}` : formatMoney(n);
@@ -53,7 +53,7 @@ function Stat({
           display: "flex",
           fontSize: 36,
           whiteSpace: "nowrap",
-          color: color ?? CREAM,
+          color: color ?? TEXT,
         }}
       >
         {value}
@@ -138,21 +138,21 @@ function GrowthGraph({ collected, lost }: { collected: Watch[]; lost: boolean })
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
       <defs>
         <linearGradient id="pf-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor={GOLD} stopOpacity="0.35" />
-          <stop offset="1" stopColor={GOLD} stopOpacity="0" />
+          <stop offset="0" stopColor={ACCENT} stopOpacity="0.35" />
+          <stop offset="1" stopColor={ACCENT} stopOpacity="0" />
         </linearGradient>
       </defs>
       <path d={area} fill="url(#pf-grad)" />
       <path
         d={line}
         fill="none"
-        stroke={GOLD}
+        stroke={ACCENT}
         strokeWidth={4}
         strokeLinejoin="round"
         strokeLinecap="round"
       />
       {pts.map((p, i) => (
-        <circle key={i} cx={p[0]} cy={p[1]} r={5} fill={GOLD} />
+        <circle key={i} cx={p[0]} cy={p[1]} r={5} fill={ACCENT} />
       ))}
     </svg>
   );
@@ -178,14 +178,14 @@ export const CollectionCard = forwardRef<HTMLDivElement, CollectionCardProps>(
     // Per-rank sizing: the winner (1) is wider, taller and lifted highest; the
     // runners-up (2 & 3) share the same size and lift so they sit level.
     const RANK = {
-      1: { cardW: 280, imgH: 124, lift: 26, border: "rgba(216,185,135,0.45)" },
-      2: { cardW: 224, imgH: 104, lift: 10, border: "rgba(216,185,135,0.16)" },
-      3: { cardW: 224, imgH: 104, lift: 10, border: "rgba(216,185,135,0.16)" },
+      1: { cardW: 280, imgH: 124, lift: 26, border: "rgba(157,92,255,0.45)" },
+      2: { cardW: 224, imgH: 104, lift: 10, border: "rgba(157,92,255,0.16)" },
+      3: { cardW: 224, imgH: 104, lift: 10, border: "rgba(157,92,255,0.16)" },
     } as const;
     const BADGE = {
-      1: { bg: GOLD, color: "#1a1016" },
-      2: { bg: "rgba(216,185,135,0.28)", color: CREAM },
-      3: { bg: "rgba(216,185,135,0.20)", color: CREAM },
+      1: { bg: ACCENT, color: "#1b0b33" },
+      2: { bg: "rgba(157,92,255,0.28)", color: TEXT },
+      3: { bg: "rgba(157,92,255,0.20)", color: TEXT },
     } as const;
 
     // One podium card. Rendered into fixed left/middle/right slots so rank 1
@@ -234,7 +234,7 @@ export const CollectionCard = forwardRef<HTMLDivElement, CollectionCardProps>(
               borderRadius: 16,
               border: "1px solid rgba(255,255,255,0.06)",
               backgroundImage:
-                "radial-gradient(circle at 50% 35%, rgba(40,26,36,0.9), rgba(8,5,9,0.95))",
+                "radial-gradient(circle at 50% 35%, rgba(36,32,41,0.9), rgba(8,5,9,0.95))",
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -259,7 +259,7 @@ export const CollectionCard = forwardRef<HTMLDivElement, CollectionCardProps>(
                 fontSize: 15,
                 letterSpacing: "0.16em",
                 textTransform: "uppercase",
-                color: GOLD_DEEP,
+                color: ACCENT_DEEP,
               }}
             >
               {w.brand}
@@ -269,7 +269,7 @@ export const CollectionCard = forwardRef<HTMLDivElement, CollectionCardProps>(
                 display: "flex",
                 maxWidth: "100%",
                 fontSize: 18,
-                color: CREAM,
+                color: TEXT,
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
@@ -277,7 +277,7 @@ export const CollectionCard = forwardRef<HTMLDivElement, CollectionCardProps>(
             >
               {w.model}
             </div>
-            <div style={{ display: "flex", marginTop: 2, fontSize: 20, color: GOLD }}>
+            <div style={{ display: "flex", marginTop: 2, fontSize: 20, color: ACCENT }}>
               {formatMoney(w.price)}
             </div>
           </div>
@@ -298,9 +298,9 @@ export const CollectionCard = forwardRef<HTMLDivElement, CollectionCardProps>(
           borderRadius: 44,
           overflow: "hidden",
           backgroundImage:
-            "linear-gradient(150deg, #000 0%, #0c0309 38%, #3e0f28 100%)",
+            "radial-gradient(60% 55% at 85% 100%, rgba(112,50,207,0.35), transparent 70%), linear-gradient(148deg, #000000, #242029)",
           fontFamily: "var(--font-made-carving), sans-serif",
-          color: CREAM,
+          color: TEXT,
         }}
       >
         {/* Brand row */}
@@ -313,8 +313,8 @@ export const CollectionCard = forwardRef<HTMLDivElement, CollectionCardProps>(
         >
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
             <Logo size={42} />
-            <span style={{ display: "flex", fontSize: 34, color: GOLD }}>
-              watch.fun
+            <span style={{ display: "flex", fontSize: 34, color: TEXT }}>
+              watch<span style={{ color: ACCENT_DEEP }}>.</span>fun
             </span>
           </div>
           <div
@@ -339,12 +339,12 @@ export const CollectionCard = forwardRef<HTMLDivElement, CollectionCardProps>(
               lineHeight: 1,
               letterSpacing: "0.02em",
               textTransform: "uppercase",
-              color: lost ? BUST : GOLD,
+              color: lost ? BUST : ACCENT,
             }}
           >
             {lost ? "Collection Ruined" : "Collection Complete"}
           </div>
-          <div style={{ display: "flex", marginTop: 16, fontSize: 34, color: CREAM }}>
+          <div style={{ display: "flex", marginTop: 16, fontSize: 34, color: TEXT }}>
             {displayName}
             {h ? <span style={{ color: MUTED }}>&nbsp;· {h}</span> : ""}
           </div>
@@ -367,7 +367,7 @@ export const CollectionCard = forwardRef<HTMLDivElement, CollectionCardProps>(
           <Stat
             label="Remaining"
             value={fmtSigned(remaining)}
-            color={remaining < 0 ? BUST : GOLD}
+            color={remaining < 0 ? BUST : ACCENT}
           />
         </div>
 
@@ -430,7 +430,7 @@ export const CollectionCard = forwardRef<HTMLDivElement, CollectionCardProps>(
             >
               Total Collection Value
             </div>
-            <div style={{ display: "flex", marginTop: 8, fontSize: 64, color: GOLD }}>
+            <div style={{ display: "flex", marginTop: 8, fontSize: 64, color: ACCENT }}>
               {formatMoney(spent)}
             </div>
           </div>

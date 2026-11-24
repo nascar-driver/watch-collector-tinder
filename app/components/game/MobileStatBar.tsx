@@ -40,7 +40,7 @@ export function MobileStatBar({
           </div>
           <AnimatedMoney
             value={remaining}
-            className="text-gold-gradient text-3xl tabular-nums"
+            className="text-brand-gradient text-3xl tabular-nums"
           />
         </div>
 
@@ -53,7 +53,7 @@ export function MobileStatBar({
           </DrawerTrigger>
           <DrawerContent>
             <DrawerHeader>
-              <DrawerTitle className="text-gold-gradient text-2xl uppercase">
+              <DrawerTitle className="text-brand-gradient text-2xl uppercase">
                 Your Collection
               </DrawerTitle>
               <DrawerDescription>

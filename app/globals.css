@@ -6,8 +6,8 @@
 
 /*
  * App is locked to a dark theme (stream-friendly), independent of OS setting.
- * shadcn's semantic tokens are mapped to the watch.fun brand palette
- * (Purple / Black / Gold) so every shadcn component is on-brand by default.
+ * shadcn's semantic tokens are mapped to the watch.fun purple palette
+ * (copied from watch.fun.collect) so every shadcn component is on-brand by default.
  */
 :root {
   color-scheme: dark;
@@ -15,26 +15,26 @@
 
   /* shadcn semantic tokens → brand (dark) */
   --background: #0a0a0a;
-  --foreground: #f5ecd9;
-  --card: #15101a;
-  --card-foreground: #f5ecd9;
-  --popover: #15101a;
-  --popover-foreground: #f5ecd9;
-  --primary: #d8b987; /* gold */
-  --primary-foreground: #0a0a0a;
-  --secondary: #3e0f28; /* purple */
-  --secondary-foreground: #f5ecd9;
-  --muted: #1c1420;
-  --muted-foreground: rgba(245, 236, 217, 0.55);
-  --accent: #2a1a24;
-  --accent-foreground: #f5ecd9;
+  --foreground: #e5e3e8;
+  --card: #17151b;
+  --card-foreground: #e5e3e8;
+  --popover: #17151b;
+  --popover-foreground: #e5e3e8;
+  --primary: #9d5cff; /* purple */
+  --primary-foreground: #efeefd;
+  --secondary: #2b2238;
+  --secondary-foreground: #e5e3e8;
+  --muted: #1e1b22;
+  --muted-foreground: #8c8a91;
+  --accent: #2a2630;
+  --accent-foreground: #e5e3e8;
   --destructive: #e5484d; /* bust red */
-  --border: rgba(216, 185, 135, 0.18); /* faint gold hairline */
-  --input: rgba(216, 185, 135, 0.22);
-  --ring: #d8b987;
+  --border: rgba(162, 162, 162, 0.15); /* faint neutral hairline */
+  --input: rgba(162, 162, 162, 0.25);
+  --ring: #9d5cff;
 
   /* Glass panel tokens (e.g. the setup fields card). */
-  --border-emphasized: rgb(248 239 211 / 55%);
+  --border-emphasized: rgba(162, 162, 162, 0.25);
   --background-secondary: linear-gradient(
       0deg,
       rgba(0, 0, 0, 0.5),
@@ -42,8 +42,11 @@
     ),
     rgba(232, 231, 227, 0.1);
 
-  /* Page background gradient (black → brand purple). */
-  --bg-gradient: linear-gradient(135deg, #000, #000 25%, #3e0f28);
+  /* Page background: collect's charcoal gradient + a static purple glow
+     (stands in for collect's animated .aurora). */
+  --bg-gradient:
+    radial-gradient(60% 55% at 85% 100%, rgba(112, 50, 207, 0.22), transparent 70%),
+    linear-gradient(148deg, #000000, #242029);
 }
 
 @theme inline {
@@ -75,17 +78,14 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* watch.fun brand utilities (text-gold, bg-panel, text-buy, …) */
-  --color-gold: #d8b987;
-  --color-gold-bright: #ebcc99;
-  --color-gold-deep: #a7855b;
-  --color-purple: #3e0f28;
-  --color-purple-light: #5c1a3d;
-  --color-cream: #f5ecd9;
+  /* watch.fun brand utilities (text-brand, text-highlight, text-buy, …) */
+  --color-brand: #9d5cff; /* logomark rays, glows */
+  --color-brand-deep: #7032cf; /* CTA fill */
+  --color-highlight: #c198ff; /* purple type on dark */
+  --color-lilac: #efeefd; /* CTA label */
   --color-buy: #1fbf75; /* positive / BUY */
   --color-bust: #e5484d; /* lose / PASS reveal */
-  --color-panel: #15101a; /* lifted dark, purple-tinted surface */
-  --color-line: rgba(216, 185, 135, 0.18);
+  --color-line: rgba(162, 162, 162, 0.15);
 }
 
 @layer base {
@@ -105,13 +105,9 @@
   }
 }
 
-/* Gold-gradient display text (per brand titles). */
-.text-gold-gradient {
-  background: linear-gradient(
-    135deg,
-    var(--color-gold-bright),
-    var(--color-gold-deep)
-  );
+/* Purple-gradient display text (titles, stat numbers). */
+.text-brand-gradient {
+  background: linear-gradient(135deg, #e7e1ff, var(--color-highlight) 45%, #8d7bff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -122,11 +118,11 @@
   letter-spacing: 0.05em;
 }
 
-/* Primary button — gold-gradient pill (shadcn Button default variant). */
+/* Primary button — collect's purple CTA pill (shadcn Button default variant). */
 .btn-primary {
   border-radius: 999px;
   padding: 12px 16px;
-  color: #000;
+  color: var(--color-lilac);
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
@@ -135,19 +131,19 @@
   cursor: pointer;
   border: none;
   user-select: none;
-  background: linear-gradient(135deg, #d4a574, #f4e5b8 50%, #d4a574);
-  background-size: 200% 200%;
-  background-position: 0 0;
+  background: var(--color-brand-deep);
+  box-shadow: 0 10px 40px -12px rgba(112, 50, 207, 0.65);
   transition:
-    background-color 0.22s ease,
-    background-position 0.28s ease,
+    background 0.22s ease,
+    color 0.22s ease,
     transform 0.18s ease,
     opacity 0.18s ease,
     box-shadow 0.18s ease;
 }
 .btn-primary:hover {
-  background-position: 100% 100%;
-  box-shadow: 0 8px 24px -8px rgba(212, 165, 116, 0.5);
+  background: linear-gradient(172deg, #8d7bff, #e7e1ff);
+  color: #1b0b33;
+  box-shadow: 0 20px 60px -12px rgba(141, 123, 255, 0.75);
 }
 
 /* Scrollable area with no visible scrollbar. */
@@ -188,7 +184,7 @@
   border-radius: 24px 24px 0 0;
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  color: #e8e7e3;
+  color: #e5e3e8;
   animation: legalSlideUp 0.35s cubic-bezier(0.24, 0.82, 0.4, 1);
 }
 @media (min-width: 1024px) {
@@ -198,7 +194,7 @@
     max-height: 80vh;
     padding: 24px;
     background: rgba(0, 0, 0, 0.8);
-    border: 1px solid rgba(248, 239, 211, 0.25);
+    border: 1px solid rgba(229, 227, 232, 0.25);
     border-radius: 40px;
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
@@ -218,15 +214,15 @@
   justify-content: center;
   border: none;
   border-radius: 9999px;
-  background: rgba(248, 239, 211, 0.15);
-  color: #e8dccb;
+  background: rgba(229, 227, 232, 0.15);
+  color: #e5e3e8;
   cursor: pointer;
   transition:
     background-color 0.2s ease,
     transform 0.18s ease;
 }
 .legal-modal-close:hover {
-  background: rgba(248, 239, 211, 0.25);
+  background: rgba(229, 227, 232, 0.25);
   transform: scale(1.05);
 }
 @media (min-width: 1024px) {
@@ -259,30 +255,30 @@
 
 /* Rich text for legal documents rendered in <LegalModal /> (Terms, Privacy). */
 .legal-content {
-  color: #e8e7e3;
+  color: #e5e3e8;
   font-size: 1rem;
   line-height: 1.7;
 }
 .legal-content p {
   margin: 0.75rem 0;
-  color: #e8e7e3;
+  color: #e5e3e8;
 }
 .legal-content h3 {
   margin: 1.5rem 0 1rem;
-  color: var(--color-cream);
+  color: var(--foreground);
   font-size: 1.25rem;
   font-weight: 600;
 }
 .legal-content hr {
   border: 0;
-  border-top: 1px solid rgba(248, 239, 211, 0.12);
+  border-top: 1px solid rgba(229, 227, 232, 0.12);
   margin: 1rem 0;
 }
 .legal-content ul,
 .legal-content ol {
   margin: 0.75rem 0;
   padding-left: 1.25rem;
-  color: #e8e7e3;
+  color: #e5e3e8;
 }
 .legal-content ul {
   list-style: disc;
@@ -294,15 +290,15 @@
   margin: 0.25rem 0;
 }
 .legal-content a {
-  color: #d4a574;
+  color: var(--color-highlight);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 .legal-content a:hover {
-  color: var(--color-gold-bright);
+  color: var(--color-lilac);
 }
 .legal-content strong {
-  color: var(--color-cream);
+  color: var(--foreground);
   font-weight: 600;
 }
 .legal-content em {

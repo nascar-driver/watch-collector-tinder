@@ -46,7 +46,7 @@ export function Footer() {
         {/* far left: logo + copyright */}
         <div className="hidden items-center gap-3 md:flex">
           <Logo size={32} />
-          <p className="text-sm tracking-brand text-[#a39f8f]">{COPYRIGHT}</p>
+          <p className="text-sm tracking-brand text-[#8c8a91]">{COPYRIGHT}</p>
         </div>
 
         {/* middle: nav links */}
@@ -59,7 +59,7 @@ export function Footer() {
                 onClick={() =>
                   "doc" in link ? setOpenDoc(link.doc) : setContactOpen(true)
                 }
-                className="cursor-pointer text-sm uppercase tracking-brand text-white transition-colors hover:text-gold"
+                className="cursor-pointer text-sm uppercase tracking-brand text-white transition-colors hover:text-highlight"
               >
                 {link.label}
               </button>
@@ -68,7 +68,7 @@ export function Footer() {
         </nav>
 
         {/* mobile: copyright */}
-        <p className="text-sm tracking-brand text-[#a39f8f] md:hidden">
+        <p className="text-sm tracking-brand text-[#8c8a91] md:hidden">
           {COPYRIGHT}
         </p>
 
@@ -81,7 +81,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-[rgba(248,239,211,0.15)] text-[#e8e7e3] no-underline transition-[background-color,color,transform] duration-200 ease-[ease] hover:bg-[rgba(212,165,116,0.2)] hover:text-[#d4a574] hover:[transform:scale(1.05)]"
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-[rgba(229,227,232,0.15)] text-[#e5e3e8] no-underline transition-[background-color,color,transform] duration-200 ease-[ease] hover:bg-[rgba(157,92,255,0.2)] hover:text-[#c198ff] hover:[transform:scale(1.05)]"
             >
               <Icon />
             </a>
